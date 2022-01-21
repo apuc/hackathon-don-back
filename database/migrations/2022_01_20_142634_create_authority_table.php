@@ -20,17 +20,24 @@ class CreateAuthorityTable extends Migration
             $table->text('description');
             $table->string('email')->unique();
             $table->string('email_ministry')->unique();
+            $table->unsignedBigInteger('address_id')->nullable();
+
             $table->string('phone', 11)->unique()->nullable();
-            $table->string('responsible_person');
+            $table->unsignedBigInteger('responsible_id')->nullable();
+
             $table->string('web_resource');
             $table->text('additional_information');
-            $table->tinyInteger('authority_type');
+            $table->unsignedBigInteger('authority_type_id');
             $table->tinyInteger('inform_by_email');
             $table->tinyInteger('inform_by_sms');
             $table->tinyInteger('gen_daily_report');
             $table->tinyInteger('is_visible');
-            $table->string('avatar_image');
             $table->timestamps();
+
+            $table->foreign('authority_type_id')->references('id')->on('authority_type')->onDelete('cascade');
+            $table->foreign('responsible_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('address_id')->references('id')->on('address')->onDelete('cascade');
+
         });
     }
 

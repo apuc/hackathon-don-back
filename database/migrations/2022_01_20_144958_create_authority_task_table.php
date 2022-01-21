@@ -20,12 +20,12 @@ class CreateAuthorityTaskTable extends Migration
             $table->text('explanations')->nullable();
             $table->dateTime('planned_date')->nullable();
             $table->dateTime('work_date')->nullable();
-            $table->dateTime('fio_responsible')->nullable();
-            $table->string('responsible_email')->nullable();
-            $table->string('responsible_phone', 11)->nullable();
+
+            $table->unsignedBigInteger('responsible_id');
             $table->timestamps();
 
             $table->foreign('petition_id')->references('id')->on('petition')->onDelete('cascade');
+            $table->foreign('responsible_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

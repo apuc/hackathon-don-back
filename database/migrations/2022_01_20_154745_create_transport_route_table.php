@@ -16,8 +16,7 @@ class CreateTransportRouteTable extends Migration
         Schema::create('transport_route', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('route_number');
-
+            $table->string('route_number', 5);
             $table->timestamps();
         });
     }

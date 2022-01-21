@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthorityRegionTable extends Migration
+class CreateAuthorityDistrictTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAuthorityRegionTable extends Migration
      */
     public function up()
     {
-        Schema::create('authority_region', function (Blueprint $table) {
+        Schema::create('authority_district', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('authority_id');
-            $table->unsignedBigInteger('region_id');
+            $table->unsignedBigInteger('district_id');
             $table->timestamps();
 
             $table->foreign('authority_id')->references('id')->on('authority')->onDelete('cascade');
-            $table->foreign('region_id')->references('id')->on('region')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('district')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateAuthorityRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authority_region');
+        Schema::dropIfExists('authority_district');
     }
 }

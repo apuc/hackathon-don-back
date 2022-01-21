@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressTable extends Migration
+class CreateTransportTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
-            $table->id()->index();
-            $table->string('longitude'); // долгота
-            $table->string('latitude'); // широта
-            $table->string('explanation');
+        Schema::create('transport_type', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateAddressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('transport_type');
     }
 }
