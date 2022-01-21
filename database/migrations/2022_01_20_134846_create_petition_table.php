@@ -21,8 +21,8 @@ class CreatePetitionTable extends Migration
             $table->tinyInteger('status');
 
             $table->text('description');
-            $table->integer('rating')->nullable();;
-            $table->integer('views')->nullable();;
+            $table->integer('rating')->nullable();
+            $table->integer('views')->nullable();
             $table->timestamps();
 
 
