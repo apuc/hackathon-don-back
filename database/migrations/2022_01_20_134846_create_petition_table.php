@@ -15,7 +15,7 @@ class CreatePetitionTable extends Migration
     {
         Schema::create('petition', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('address_id');
 
             $table->tinyInteger('status')->default(0);
