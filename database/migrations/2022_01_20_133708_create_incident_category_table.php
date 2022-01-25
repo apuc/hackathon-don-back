@@ -19,7 +19,7 @@ class CreateIncidentCategoryTable extends Migration
             $table->string('mnemonic_name');
             $table->string('icon');
             $table->integer('rating');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

@@ -28,10 +28,10 @@ class CreateAuthorityTable extends Migration
             $table->string('web_resource');
             $table->text('additional_information');
             $table->unsignedBigInteger('authority_type_id');
-            $table->tinyInteger('inform_by_email');
-            $table->tinyInteger('inform_by_sms');
-            $table->tinyInteger('gen_daily_report');
-            $table->tinyInteger('is_visible');
+            $table->tinyInteger('inform_by_email')->default(0);
+            $table->tinyInteger('inform_by_sms')->default(0);
+            $table->tinyInteger('gen_daily_report')->default(0);
+            $table->tinyInteger('is_visible')->default(0);
             $table->timestamps();
 
             $table->foreign('authority_type_id')->references('id')->on('authority_type')->onDelete('cascade');

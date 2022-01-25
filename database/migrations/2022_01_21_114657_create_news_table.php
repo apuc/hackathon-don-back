@@ -19,7 +19,7 @@ class CreateNewsTable extends Migration
             $table->text('description');
             $table->unsignedBigInteger('news_category_id');
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->integer('rating')->nullable();
             $table->integer('views')->nullable();
 

@@ -17,7 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('login')->unique();
             $table->string('password');
-            $table->tinyInteger('status');
+
+            $table->string('email')->unique()->nullable();
+            $table->string('phone', 11)->unique()->nullable();
+
+            $table->tinyInteger('status')->default(0);
             $table->string('confirm_sms_code')->nullable();
             $table->string('confirm_email_code')->nullable();
             $table->rememberToken();

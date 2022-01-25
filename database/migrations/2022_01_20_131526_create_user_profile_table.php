@@ -24,9 +24,6 @@ class CreateUserProfileTable extends Migration
             $table->integer('rating')->default(0);
             $table->integer('level')->default(1);
 
-            $table->string('email')->unique()->nullable();
-            $table->string('phone', 11)->unique()->nullable();
-
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
 

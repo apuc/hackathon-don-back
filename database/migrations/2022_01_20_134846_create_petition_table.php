@@ -18,7 +18,7 @@ class CreatePetitionTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('address_id');
 
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
 
             $table->text('description');
             $table->integer('rating')->nullable();

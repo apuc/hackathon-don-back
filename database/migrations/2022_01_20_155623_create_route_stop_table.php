@@ -19,8 +19,8 @@ class CreateRouteStopTable extends Migration
             $table->unsignedBigInteger('transport_stop_id');
             $table->timestamps();
 
-             $table->foreign('transport_route_id')->references('id')->on('transport_route')->onDelete('cascade');
-             $table->foreign('transport_stop_id')->references('id')->on('transport_stop')->onDelete('cascade');
+            $table->foreign('transport_route_id')->references('id')->on('transport_route')->onDelete('cascade');
+            $table->foreign('transport_stop_id')->references('id')->on('transport_stop')->onDelete('cascade');
         });
     }
 
