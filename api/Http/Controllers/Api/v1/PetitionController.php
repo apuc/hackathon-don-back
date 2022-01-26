@@ -3,7 +3,7 @@
 namespace Api\Http\Controllers\Api\v1;
 
 use Api\Repositories\Petition\PetitionRepository;
-use App\Services\Petition\PetitionService;
+use Api\Services\Petition\PetitionService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -26,6 +26,8 @@ class PetitionController extends Controller
         return response()->json(['success' => true,
             'data' => $sosi
         ]);
+
+//        return response()->json(['success' => false, 'message' => 'User does not exist']);
 
 
 

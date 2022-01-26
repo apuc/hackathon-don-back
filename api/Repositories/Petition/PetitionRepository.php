@@ -3,6 +3,7 @@
 namespace Api\Repositories\Petition;
 
 use Api\Http\Requests\PetitionRequest;
+use Api\Http\Resources\v1\PetitionResource;
 use App\Models\Petition;
 
 class PetitionRepository
@@ -12,6 +13,11 @@ class PetitionRepository
     public function __construct(Petition $petition)
     {
         $this->model = $petition;
+    }
+
+    Public function getPetitionById()
+    {
+       // return $this->model-
     }
 
     public function create(PetitionRequest $request): Petition
@@ -63,7 +69,13 @@ class PetitionRepository
 
     public function findById(int $id)
     {
-        return $this->model::find($id);
+        return PetitionResource::make(
+            $this->model::with([
+                'address',
+                'mediafile',
+                'hashTag',
+                'incidentCategory'
+                ])->find($id));
     }
 
 //    public function findByUserId(int $id) //:?Channel
