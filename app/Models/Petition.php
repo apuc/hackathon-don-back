@@ -18,8 +18,6 @@ class Petition extends Model
         'address_id',
         'status',
         'description',
-        'rating',
-        'views',
     ];
 
     protected $table = 'petition';
