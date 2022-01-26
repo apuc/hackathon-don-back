@@ -21,4 +21,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::prefix('sosi')->group(function () {
+    Route::get('pososi', [\Ggg\Http\Controllers\PetitionController::class, 'getPetition'])->name('pososi');
+});
+
 require __DIR__.'/auth.php';
