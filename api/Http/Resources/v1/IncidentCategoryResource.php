@@ -15,7 +15,7 @@ class IncidentCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->user_id,
+            'id' => $this->id,
             'title' => $this->title,
             'mnemonic_name' => $this->mnemonic_name,
             'icon' => $this->icon,

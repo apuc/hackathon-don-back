@@ -8,6 +8,7 @@ use Api\Repositories\Petition\PetitionRepository;
 use Api\Services\Petition\PetitionService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PetitionController extends Controller
 {
@@ -46,8 +47,9 @@ class PetitionController extends Controller
         ]);
     }
 
-    public function  store(PetitionRequest $request)
+    public function  store(Request $request)
     {
+        print_r($request->file('photo'));die();
         try {
             $petition = $this->petitionService($request);
 
