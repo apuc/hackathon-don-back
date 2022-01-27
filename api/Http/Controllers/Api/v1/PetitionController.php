@@ -47,13 +47,35 @@ class PetitionController extends Controller
         ]);
     }
 
-    public function  store(Request $request)
+    public function  store(PetitionRequest $petitionRequest)
     {
-        print_r($request->file('photo'));die();
-        try {
-            $petition = $this->petitionService($request);
 
-            return new PetitionRepository($petition);
+//        return response()->json(['success' => true,
+//            'data' => $request->post()
+//        ]);
+//        print_r('fff'); die();
+//        $cat = $request->post('incident_category');
+//        var_dump($request->post()); die;
+//
+        //print_r($petitionRequest->file('mediafiles'));die();
+
+//        $files = $petitionRequest->post('mediafiles');
+//        //$photo = $files[0];
+//        return response()->json(['success' => true,
+//            'data' => $files
+//        ]);
+//        var_dump( $files);die();
+
+//        print_r($petitionRequest->post());die();
+
+//        return response()->json(['success' => true,
+//            'data' => $petitionRequest->post()['address']
+//        ]);
+
+        try {
+            $petition = $this->petitionService->create($petitionRequest);
+
+            return $petition;//new PetitionRepository($petition);
         } catch (\Throwable $e)
         {
             abort(500);

@@ -24,16 +24,24 @@ class PetitionRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'user_id' => 'numeric',
-//            'description' => 'required',
-//            "incident_category": [],
-//            "address": {
-//                "longitude": "96.399017",
-//                "latitude": "-89.085191",
-//                "explanation": "AsB8TQozQs2UeXQwYcBqTjTPhrldQtADUJpwK62nVVDnaiQ29QtkXsbfUf7Sp9LdzspCZEjVM65hRFqMueFaRuoXE4logftN6HMx",
-//            },
-//            "mediafile": [],
-//        "hash_tag": []
+            'user_id' => 'integer',
+            'description' => 'required|string',
+
+            'incident_category' => 'array|required',
+            'incident_category.*.category_id' => 'integer|required',
+
+            'address' => 'array|required',
+            'address.longitude' => 'required',
+            'address.latitude' => 'required',
+            'address.explanation' => 'string',
+
+            'mediafiles' => 'array|required',
+            'mediafiles.photo' => 'mimes:jpeg,bmp,png',
+            'mediafiles.video' => 'string',
+
+            'hashtag' => 'array',
+            'hashtag.*.tag_id]' => 'numeric',
+
         ];
 
 

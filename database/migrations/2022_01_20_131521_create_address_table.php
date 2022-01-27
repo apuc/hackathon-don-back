@@ -17,7 +17,7 @@ class CreateAddressTable extends Migration
             $table->id()->index();
             $table->string('longitude'); // долгота
             $table->string('latitude'); // широта
-            $table->string('explanation');
+            $table->string('explanation')->nullable();
             $table->timestamps();
         });
     }
