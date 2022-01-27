@@ -2,10 +2,10 @@
 
 namespace Api\Http\Controllers\Api\v1;
 
+
 use Api\Http\Requests\v1\PetitionRequest;
 use Api\Repositories\Petition\PetitionRepository;
 use Api\Services\Petition\PetitionService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 

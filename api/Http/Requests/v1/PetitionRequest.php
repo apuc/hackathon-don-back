@@ -24,10 +24,18 @@ class PetitionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'numeric',
-            'address_id' => 'required|numeric',
-            'status' => 'required|numeric',
-            'description' => 'required',
+//            'user_id' => 'numeric',
+//            'description' => 'required',
+//            "incident_category": [],
+//            "address": {
+//                "longitude": "96.399017",
+//                "latitude": "-89.085191",
+//                "explanation": "AsB8TQozQs2UeXQwYcBqTjTPhrldQtADUJpwK62nVVDnaiQ29QtkXsbfUf7Sp9LdzspCZEjVM65hRFqMueFaRuoXE4logftN6HMx",
+//            },
+//            "mediafile": [],
+//        "hash_tag": []
         ];
+
+
     }
 }

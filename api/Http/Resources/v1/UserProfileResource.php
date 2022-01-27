@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\v1;
+namespace Api\Http\Resources\v1;
 
 use Api\Http\Resources\v1\AddressResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,12 +19,12 @@ class UserProfileResource extends JsonResource
             'id' => $this->id,
             'fio' => $this->fio,
             'photo' => $this->photo,
-            'address' => AddressResource::make($this->address),
             'created_at' => $this->created_at,
             'rating' => $this->rating,
             'level' => $this->level,
             'email_verified_at' => $this->email_verified_at,
             'phone_verified_at' => $this->phone_verified_at,
+            'address' => AddressResource::make($this->address),
         ];
     }
 }
