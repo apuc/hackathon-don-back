@@ -2,6 +2,7 @@
 
 namespace Api\Http\Controllers\Api\v1;
 
+use Api\Http\Requests\v1\PetitionRequest;
 use Api\Repositories\Petition\PetitionRepository;
 use Api\Services\Petition\PetitionService;
 use Illuminate\Http\Request;
@@ -19,34 +20,6 @@ class PetitionController extends Controller
         $this->petitionService = $service;
     }
 
-    public function getPetition(Request $request): JsonResponse
-    {
-        $sosi = 'sosi2222222pos111';
-
-        return response()->json(['success' => true,
-            'data' => $sosi
-        ]);
-
-//        return response()->json(['success' => false, 'message' => 'User does not exist']);
-
-
-
-//        $project = Project::where('token', $request->bearerToken())->first();
-//
-//        $affiliate = $project->affiliates()->where('user_uid', $request->get('user_uid'))->first();
-//        if (empty($affiliate)) {
-//            if (Config('app.production')) {
-//                return response()->json('Internal server error', 500);
-//            } else {
-//                return response()->json('Incorrect user_uid', 500);
-//            }
-//        }
-//        $affiliateResource = new AffiliateResource($affiliate);
-//        return response()->json([
-//            'data' => $affiliateResource
-//        ]);
-    }
-
     public function show($petition_id): JsonResponse
     {
         $petition = $this->petitionRepository->findById($petition_id);
@@ -59,16 +32,30 @@ class PetitionController extends Controller
             'data' => $petition
         ]);
     }
+
     public function showByUser($user_id): JsonResponse
     {
-        $petition = $this->petitionRepository->findById($user_id);
+        $petitions = $this->petitionRepository->findByUserId($user_id);
 
-        if (empty($petition)) {
+        if (empty($petitions)) { // TODO не работает проверка
             return response()->json('Petition not found', 404);
         }
 
         return response()->json(['success' => true,
-            'data' => $petition
+            'data' => $petitions
         ]);
     }
+
+    public function  store(PetitionRequest $request)
+    {
+        try {
+            $petition = $this->petitionService($request);
+
+            return new PetitionRepository($petition);
+        } catch (\Throwable $e)
+        {
+            abort(500);
+        }
+    }
+
 }

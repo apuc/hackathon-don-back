@@ -2,7 +2,7 @@
 
 namespace Api\Services\Petition;
 
-use Api\Http\Requests\PetitionRequest;
+use Api\Http\Requests\v1\PetitionRequest;
 use Illuminate\Support\Facades\DB;
 
 class PetitionService
