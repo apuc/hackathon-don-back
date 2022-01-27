@@ -28,19 +28,24 @@ class PetitionRequest extends FormRequest
             'description' => 'required|string',
 
             'incident_category' => 'array|required',
-            'incident_category.*.category_id' => 'integer|required',
+            'incident_category.*.incident_category_id' => 'integer|required',
 
             'address' => 'array|required',
             'address.longitude' => 'required',
             'address.latitude' => 'required',
             'address.explanation' => 'string',
 
-            'mediafiles' => 'array|required',
-            'mediafiles.photo' => 'mimes:jpeg,bmp,png',
-            'mediafiles.video' => 'string',
-
             'hashtag' => 'array',
             'hashtag.*.tag_id]' => 'numeric',
+
+//            'mediafiles' => 'array',
+//            'mediafiles.*.photo' => 'mimes:jpeg,bmp,png',
+//            'mediafiles.*.video' => 'string',
+
+            'photo' => 'mimes:jpeg,bmp,png',
+            'video' => 'string',
+
+
 
         ];
 

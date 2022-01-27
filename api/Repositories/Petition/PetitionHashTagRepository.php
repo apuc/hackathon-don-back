@@ -4,23 +4,17 @@ namespace Api\Repositories\Petition;
 
 
 use Api\Http\Requests\v1\PetitionHashTagRequest;
-use App\Models\Pe;
+use App\Models\PetitionHashTag;
 
 class PetitionHashTagRepository
 {
-    protected $model;
-
-    public function __construct(PetitionHashTagRequest $petitionHashTagRequest)
+    public function create(PetitionHashTagRequest $request)
     {
-        $this->model = $petitionHashTagRequest;
-    }
+        $model = new PetitionHashTag();
+        $model->fill($request->all());
 
-    public function create(PetitionHashTagRequest $request)//: Address
-    {
-        $this->model->fill($request->all());
-
-        if ($this->model->save()) {
-            return $this->model;
+        if ($model->save()) {
+            return $model;
         }
         else {
             throw new \DomainException('Saving error');

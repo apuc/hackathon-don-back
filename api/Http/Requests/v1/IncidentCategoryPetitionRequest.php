@@ -4,7 +4,7 @@ namespace Api\Http\Requests\v1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PetitionHashTagRequest extends FormRequest
+class IncidentCategoryPetitionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class PetitionHashTagRequest extends FormRequest
     {
         return [
             'petition_id' =>  'required|integer',
-            'hash_tag_id' => 'required|integer',
+            'incident_category_id' => 'required|integer',
         ];
     }
 }

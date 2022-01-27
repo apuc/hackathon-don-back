@@ -4,7 +4,7 @@ namespace Api\Http\Requests\v1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PetitionHashTagRequest extends FormRequest
+class MediaFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class PetitionHashTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'petition_id' =>  'required|integer',
-            'hash_tag_id' => 'required|integer',
+            'path' =>  'required|string',
         ];
     }
 }
