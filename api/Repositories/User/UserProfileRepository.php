@@ -3,20 +3,20 @@
 namespace Api\Repositories\User;
 
 
-use Api\Http\Requests\v1\UserRequest;
+use Api\Http\Requests\v1\UserProfileRequest;
 use Api\Http\Resources\v1\UserResource;
-use App\Models\User;
+use App\Models\UserProfile;
 
-class UserRepository
+class UserProfileRepository
 {
     protected $model;
 
-    public function __construct(User $user)
+    public function __construct(UserProfile $profile)
     {
-        $this->model = $user;
+        $this->model = $profile;
     }
 
-    public function create(UserRequest $request)
+    public function create(UserProfileRequest $request)
     {
         $this->model->fill($request->all());
 

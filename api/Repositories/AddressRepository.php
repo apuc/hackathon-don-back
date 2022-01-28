@@ -1,7 +1,6 @@
 <?php
 
-namespace Api\Repositories\Petition;
-
+namespace Api\Repositories;
 
 use Api\Http\Requests\v1\AddressRequest;
 use App\Models\Address;
@@ -15,7 +14,7 @@ class AddressRepository
         $this->model = $address;
     }
 
-    public function create(AddressRequest $request)//: Address
+    public function create(AddressRequest $request)
     {
         $this->model->fill($request->all());
 

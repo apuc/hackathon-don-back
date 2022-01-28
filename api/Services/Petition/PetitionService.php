@@ -8,7 +8,7 @@ use Api\Http\Requests\v1\MediaFileRequest;
 use Api\Http\Requests\v1\PetitionHashTagRequest;
 use Api\Http\Requests\v1\PetitionMediaFileRequest;
 use Api\Http\Requests\v1\PetitionRequest;
-use Api\Repositories\Petition\AddressRepository;
+use Api\Repositories\AddressRepository;
 use Api\Repositories\Petition\IncidentCategoryPetitionRepository;
 use Api\Repositories\Petition\MediaFileRepository;
 use Api\Repositories\Petition\PetitionHashTagRepository;

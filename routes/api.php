@@ -25,7 +25,9 @@ Route::prefix('petition')->group(function () {
 });
 Route::prefix('user')->group(function () {
     Route::get('show/{user_id}', [\Api\Http\Controllers\Api\v1\UserController::class, 'show'])->name('show');
+    Route::post('store', [\Api\Http\Controllers\Api\v1\UserController::class, 'store'])->name('store');
 });
+
 Route::prefix('categories')->group(function () {
     Route::get('show', [\Api\Http\Controllers\Api\v1\IncidentCategoryController::class, 'show'])->name('show');
 });

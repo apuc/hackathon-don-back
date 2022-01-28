@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             PetitionTableSeeder::class,
             IncidentCategorySeeder::class,
             HashTagSeeder::class,
+            RolesSeeder::class,
         ]);
     }
 }
