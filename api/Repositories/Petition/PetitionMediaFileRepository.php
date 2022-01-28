@@ -7,19 +7,13 @@ use App\Models\PetitionMediaFile;
 
 class PetitionMediaFileRepository
 {
-    protected $model;
-
-    public function __construct(PetitionMediaFile $petitionMediaFile)
-    {
-        $this->model = $petitionMediaFile;
-    }
-
     public function create(PetitionMediaFileRequest $request)
     {
-        $this->model->fill($request->all());
+        $model = new PetitionMediaFile();
+        $model->fill($request->all());
 
-        if ($this->model->save()) {
-            return $this->model;
+        if ($model->save()) {
+            return $model;
         }
         else {
             throw new \DomainException('Saving error');

@@ -7,19 +7,13 @@ use App\Models\MediaFile;
 
 class MediaFileRepository
 {
-    protected $model;
-
-    public function __construct(MediaFile $mediaFile)
-    {
-        $this->model = $mediaFile;
-    }
-
     public function create(MediaFileRequest $request)
     {
-        $this->model->fill($request->all());
+        $model = new MediaFile();
+        $model->fill($request->all());
 
-        if ($this->model->save()) {
-            return $this->model;
+        if ($model->save()) {
+            return $model;
         }
         else {
             throw new \DomainException('Saving error');

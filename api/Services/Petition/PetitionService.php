@@ -34,7 +34,6 @@ class PetitionService
         $this->petitionRepository = $petitionRepository;
         $this->petitionHasTagRepository = $petitionHasTagRepository;
         $this->categoryPetitionRepository = $categoryPetitionRepository;
-
         $this->petitionMediaFileRepository = $petitionMediaFileRepository;
         $this->mediaFileRepository = $mediaFileRepository;
     }
@@ -72,7 +71,6 @@ class PetitionService
     {
         $mediaFileRequest = new MediaFileRequest();
         $mediaFileRequest->merge(['path' => $path]);
-
         $video = $this->mediaFileRepository->create($mediaFileRequest);
 
         $petitionMediaFileRequest = new PetitionMediaFileRequest();

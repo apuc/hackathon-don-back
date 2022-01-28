@@ -15,7 +15,7 @@ class HashTagResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->user_id,
+            'id' => $this->id,
             'title' => $this->title,
             'created_at' => $this->created_at,
         ];
