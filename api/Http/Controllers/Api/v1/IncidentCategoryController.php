@@ -16,9 +16,14 @@ class IncidentCategoryController extends Controller
         $this->incidentCategoryRepository = $incidentCategory;
     }
 
-    public function show(): JsonResponse
+    public function show($category_id = null): JsonResponse
     {
-        $categories = $this->incidentCategoryRepository->getAll();
+        if(!empty($category_id)) {
+            $categories = $this->incidentCategoryRepository->findById($category_id);
+        }
+        else {
+            $categories = $this->incidentCategoryRepository->getAll();
+        }
 
         if (empty($categories)) {
             return response()->json('User not found', 404);

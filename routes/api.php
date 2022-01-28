@@ -29,5 +29,5 @@ Route::prefix('user')->group(function () {
 });
 
 Route::prefix('categories')->group(function () {
-    Route::get('show', [\Api\Http\Controllers\Api\v1\IncidentCategoryController::class, 'show'])->name('show');
+    Route::get('show/{category_id?}', [\Api\Http\Controllers\Api\v1\IncidentCategoryController::class, 'show'])->name('show');
 });
