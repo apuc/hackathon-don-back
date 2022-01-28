@@ -16,14 +16,10 @@ class UserProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             'fio' => $this->fio,
             'photo' => $this->photo,
-            'created_at' => $this->created_at,
             'rating' => $this->rating,
             'level' => $this->level,
-            'email_verified_at' => $this->email_verified_at,
-            'phone_verified_at' => $this->phone_verified_at,
             'address' => AddressResource::make($this->address),
         ];
     }
