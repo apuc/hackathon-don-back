@@ -3,7 +3,7 @@
 namespace Api\Services\Petition;
 
 use Api\Http\Requests\v1\AddressRequest;
-use Api\Http\Requests\v1\IncidentCategoryRequest;
+use Api\Http\Requests\v1\IncidentCategoryPetitionRequest;
 use Api\Http\Requests\v1\MediaFileRequest;
 use Api\Http\Requests\v1\PetitionHashTagRequest;
 use Api\Http\Requests\v1\PetitionMediaFileRequest;
@@ -98,7 +98,7 @@ class PetitionService
             $data = $incidentCategory;
             $data['petition_id'] = $petition_id;
 
-            $petitionCategory = new IncidentCategoryRequest();
+            $petitionCategory = new IncidentCategoryPetitionRequest();
             $petitionCategory->merge($data);
 
             $petitionCategoryArr[] = $this->categoryPetitionRepository->create($petitionCategory);

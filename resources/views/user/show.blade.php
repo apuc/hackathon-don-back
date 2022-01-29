@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Пользователи')
+
+@section('content_header')
+    <h1>Пользователи</h1>
+@stop
 
 @section('template_title')
     {{ $user->name ?? 'Show User' }}
@@ -14,12 +20,12 @@
                             <span class="card-title">Show User</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('users.index') }}"> Назад</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $user->name }}
