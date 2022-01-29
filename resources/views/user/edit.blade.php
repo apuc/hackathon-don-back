@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Редактировать Пользователя')
+
+@section('content_header')
+    <h1>Редактировать Пользователя</h1>
+@stop
 
 @section('template_title')
     Update User
