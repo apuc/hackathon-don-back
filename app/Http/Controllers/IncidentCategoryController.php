@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IncidentCategoryRequest;
 use App\Models\IncidentCategory;
 use Illuminate\Http\Request;
 
@@ -32,15 +33,11 @@ class IncidentCategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param IncidentCategoryRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(IncidentCategoryRequest $request)
     {
-        request()->validate(IncidentCategory::$rules);
-
         $incidentCategory = IncidentCategory::create($request->all());
 
         return redirect()->route('incident-categories.index')
@@ -48,10 +45,8 @@ class IncidentCategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($id)
     {
@@ -61,10 +56,8 @@ class IncidentCategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -74,16 +67,12 @@ class IncidentCategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  IncidentCategory $incidentCategory
-     * @return \Illuminate\Http\Response
+     * @param IncidentCategoryRequest $request
+     * @param IncidentCategory $incidentCategory
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, IncidentCategory $incidentCategory)
+    public function update(IncidentCategoryRequest $request, IncidentCategory $incidentCategory)
     {
-        request()->validate(IncidentCategory::$rules);
-
         $incidentCategory->update($request->all());
 
         return redirect()->route('incident-categories.index')

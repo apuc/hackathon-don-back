@@ -24,7 +24,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('incident-categories.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  Создать
                                 </a>
                               </div>
                         </div>

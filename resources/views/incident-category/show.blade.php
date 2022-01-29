@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Просмотр')
+
+@section('content_header')
+    <h1>Просмотр {{ $incidentCategory->title }}</h1>
+@stop
 
 @section('template_title')
     {{ $incidentCategory->name ?? 'Show Incident Category' }}
@@ -19,7 +25,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Title:</strong>
                             {{ $incidentCategory->title }}

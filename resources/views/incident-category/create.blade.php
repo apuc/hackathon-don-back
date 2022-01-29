@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Добавить категорию')
+
+@section('content_header')
+    <h1>Добавить категорию</h1>
+@stop
 
 @section('template_title')
     Create Incident Category

@@ -1,6 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
             {{ Form::label('title') }}
             {{ Form::text('title', $incidentCategory->title, ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => 'Title']) }}
@@ -23,7 +23,9 @@
         </div>
         <div class="form-group">
             {{ Form::label('status') }}
-            {{ Form::text('status', $incidentCategory->status, ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : ''), 'placeholder' => 'Status']) }}
+            {{ Form::select('status', [1 => 'Активна', 0 => 'Не активна'], $incidentCategory->status,
+                ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : '')])
+            }}
             {!! $errors->first('status', '<div class="invalid-feedback">:message</p>') !!}
         </div>
 

@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Редактировать категорию')
+
+@section('content_header')
+    <h1>Редактировать категорию</h1>
+@stop
 
 @section('template_title')
     Update Incident Category
