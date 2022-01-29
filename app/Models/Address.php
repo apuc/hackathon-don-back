@@ -10,6 +10,12 @@ class Address extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'longitude',
+        'latitude',
+        'explanation'
+    ];
+
     protected $table = 'address';
 
     public function userProfile(): HasMany

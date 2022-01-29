@@ -6,24 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PetitionLog extends Model
+class PetitionHashTag extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'petition_id',
-        'log_type_id',
+        'hash_tag_id',
     ];
 
-    protected $table = 'petition_log';
+    protected $table = 'petition_hash_tag';
 
-    public function logType(): BelongsTo
+    public function hashtag(): BelongsTo
     {
-        return $this->belongsTo(LogType::class);
+        return $this->belongsTo(HashTag::class, 'hash_tag_id');
     }
 
     public function petition(): BelongsTo
     {
-        return $this->belongsTo(Petition::class);
+        return $this->belongsTo(Petition::class, 'petition_id');
     }
 }

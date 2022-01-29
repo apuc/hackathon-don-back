@@ -18,8 +18,6 @@ class Petition extends Model
         'address_id',
         'status',
         'description',
-        'rating',
-        'views',
     ];
 
     protected $table = 'petition';
@@ -56,7 +54,7 @@ class Petition extends Model
 
     public function mediafile(): BelongsToMany
     {
-        return $this->belongsToMany(MediaFile::class, 'petition_mediafile')->withTimestamps();
+        return $this->belongsToMany(MediaFile::class, 'petition_mediafile', 'petition_id', 'mediafile_id')->withTimestamps();
     }
 
     public function hashTag(): BelongsToMany

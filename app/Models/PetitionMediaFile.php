@@ -6,24 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PetitionLog extends Model
+class PetitionMediaFile extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'petition_id',
-        'log_type_id',
+        'mediafile_id',
     ];
 
-    protected $table = 'petition_log';
+    protected $table = 'petition_mediafile';
 
-    public function logType(): BelongsTo
+    public function mediafile(): BelongsTo
     {
-        return $this->belongsTo(LogType::class);
+        return $this->belongsTo(MediaFile::class, 'mediafile_id');
     }
 
     public function petition(): BelongsTo
     {
-        return $this->belongsTo(Petition::class);
+        return $this->belongsTo(Petition::class, 'petition_id');
     }
 }
