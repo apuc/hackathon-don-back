@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IncidentCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('incident-categories', IncidentCategoryController::class);
 });
 //->middleware(['auth']);
 

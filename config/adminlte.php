@@ -258,6 +258,11 @@ return [
             'url'         => 'admin/users',
             'icon'        => 'far fa-fw fa-user',
         ],
+        [
+            'text'        => 'Категории',
+            'url'         => 'admin/incident-categories',
+            'icon'        => 'far fa-fw fa-list-alt',
+        ],
 //        ['header' => 'account_settings'],
 //        [
 //            'text' => 'profile',
