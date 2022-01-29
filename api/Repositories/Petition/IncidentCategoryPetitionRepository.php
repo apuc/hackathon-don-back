@@ -3,12 +3,12 @@
 namespace Api\Repositories\Petition;
 
 
-use Api\Http\Requests\v1\IncidentCategoryRequest;
+use Api\Http\Requests\v1\IncidentCategoryPetitionRequest;
 use App\Models\IncidentCategoryPetition;
 
 class IncidentCategoryPetitionRepository
 {
-    public function create(IncidentCategoryRequest $request)
+    public function create(IncidentCategoryPetitionRequest $request)
     {
         $model = new IncidentCategoryPetition();
         $model->fill($request->all());

@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Просмотр')
+@section('title', 'Заявки')
 
 @section('content_header')
-    <h1>Просмотр {{ $incidentCategory->title }}</h1>
+    <h1>Заявки</h1>
 @stop
 
 @section('template_title')
-    {{ $incidentCategory->name ?? 'Show Incident Category' }}
+    {{ $petition->name ?? 'Show Petition' }}
 @endsection
 
 @section('content')
@@ -17,34 +17,38 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Incident Category</span>
+                            <span class="card-title">Show Petition</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('incident-categories.index') }}"> Назад</a>
+                            <a class="btn btn-primary" href="{{ route('petitions.index') }}"> Назад</a>
                         </div>
                     </div>
 
                     <div class="card-body">
 
                         <div class="form-group">
-                            <strong>Title:</strong>
-                            {{ $incidentCategory->title }}
+                            <strong>User Id:</strong>
+                            {{ $petition->user_id }}
                         </div>
                         <div class="form-group">
-                            <strong>Mnemonic Name:</strong>
-                            {{ $incidentCategory->mnemonic_name }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Icon:</strong>
-                            {{ $incidentCategory->icon }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Rating:</strong>
-                            {{ $incidentCategory->rating }}
+                            <strong>Address Id:</strong>
+                            {{ $petition->address_id }}
                         </div>
                         <div class="form-group">
                             <strong>Status:</strong>
-                            {{ $incidentCategory->status }}
+                            {{ $petition->status }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Description:</strong>
+                            {{ $petition->description }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Rating:</strong>
+                            {{ $petition->rating }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Views:</strong>
+                            {{ $petition->views }}
                         </div>
 
                     </div>

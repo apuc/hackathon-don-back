@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(User::$rules);
+//        request()->validate(User::$rules);
 
         $user = User::create($request->all());
 
@@ -86,7 +86,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        request()->validate(User::$rules);
+//        request()->validate(User::$rules);
 
         $user->update($request->all());
 

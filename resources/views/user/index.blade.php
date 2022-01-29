@@ -1,4 +1,3 @@
-{{--@extends('layouts.app')--}}
 @extends('adminlte::page')
 
 @section('title', 'Пользователи')
@@ -25,7 +24,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Создать') }}
                                 </a>
                               </div>
                         </div>
@@ -61,7 +60,13 @@
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->email }}</td>
 											<td>{{ $user->phone }}</td>
-											<td>{{ $user->status }}</td>
+											<td>
+                                                @if($user->status === 1)
+                                                    Активен
+                                                @elseif($user->status === 0)
+                                                    Не активен
+                                                @endif
+                                            </td>
 											<td>{{ $user->confirm_sms_code }}</td>
 											<td>{{ $user->confirm_email_code }}</td>
 
