@@ -22,10 +22,11 @@ class CreateNewsTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->integer('rating')->nullable();
             $table->integer('views')->nullable();
+            $table->string('media');
 
             $table->timestamps();
 
-            $table->foreign('news_category_id')->references('id')->on('news_category')->onDelete('cascade');
+            $table->foreign('news_category_id')->references('id')->on('incident_category')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
