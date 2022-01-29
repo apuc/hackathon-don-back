@@ -263,6 +263,11 @@ return [
             'url'         => 'admin/incident-categories',
             'icon'        => 'far fa-fw fa-list-alt',
         ],
+        [
+            'text'        => 'Заявки',
+            'url'         => 'admin/petitions',
+            'icon'        => 'fas fa-clipboard-list',
+        ],
 //        ['header' => 'account_settings'],
 //        [
 //            'text' => 'profile',

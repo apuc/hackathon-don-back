@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Пользователи')
+@section('title', 'Заявки')
 
 @section('content_header')
-    <h1>Пользователи</h1>
+    <h1>Заявки</h1>
 @stop
 
 @section('template_title')
-    Update User
+    Update Petition
 @endsection
 
 @section('content')
@@ -19,14 +19,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update User</span>
+                        <span class="card-title">Update Petition</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('users.update', $user->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('petitions.update', $petition->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('user.form')
+                            @include('petition.form')
 
                         </form>
                     </div>

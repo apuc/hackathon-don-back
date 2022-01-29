@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Пользователи')
+
+@section('content_header')
+    <h1>Пользователи</h1>
+@stop
 
 @section('template_title')
     Create User
