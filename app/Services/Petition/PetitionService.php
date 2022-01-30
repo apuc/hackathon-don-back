@@ -3,7 +3,7 @@
 namespace App\Services\Petition;
 
 
-use App\Http\Requests\PetitionRequest;
+use Api\Http\Requests\v1\PetitionRequest;
 use App\Models\Petition;
 use App\Repositories\Petition\PetitionRepository;
 use Illuminate\Support\Facades\DB;

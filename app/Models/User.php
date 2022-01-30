@@ -47,13 +47,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public const ROLE_ADMIN = 1;
+    public const ROLE_DRIVER = 2;
+    public const ROLE_USER = 3;
+    public const ROLE_MODERATOR = 4;
+
+    public static function getRoles(): array
+    {
+        return [
+            self::ROLE_ADMIN => 'Administrator',
+            self::ROLE_DRIVER => 'Driver',
+            self::ROLE_USER => 'User',
+            self::ROLE_MODERATOR => 'Moderator',
+        ];
+    }
+
+    public function isAdmin(): bool
+    {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->id === self::ROLE_ADMIN) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function address(): HasOneThrough // TODO check this connection
     {
         return $this->hasOneThrough(Address::class, UserProfile::class);
     }
-
-
-
 
     public function roles(): BelongsToMany
     {

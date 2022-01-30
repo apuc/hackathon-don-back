@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Petition;
 
-use App\Http\Requests\v1\PetitionRequest;
+use Api\Http\Requests\v1\PetitionRequest;
 use App\Models\Petition;
 
 class PetitionRepository

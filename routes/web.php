@@ -30,7 +30,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('incident-categories', IncidentCategoryController::class);
     Route::resource('petitions', PetitionController::class);
