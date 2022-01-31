@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories\User;
+namespace App\Repositories\User;
 
 
 use Api\Http\Requests\v1\UserProfileRequest;

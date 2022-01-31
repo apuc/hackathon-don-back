@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories\IncidentCategory;
+namespace App\Repositories\IncidentCategory;
 
 
 use Api\Http\Resources\v1\IncidentCategoryResource;

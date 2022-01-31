@@ -2,10 +2,21 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $id
+ * @property int $petition_id
+ * @property int $user_id
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property Petition $petition
+ * @property User $users
+ */
 class PetitionViews extends Model
 {
     use HasFactory;
@@ -17,7 +28,7 @@ class PetitionViews extends Model
 
     protected $table = 'petition_views';
 
-    public function user(): BelongsTo
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

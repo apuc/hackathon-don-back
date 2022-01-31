@@ -3,14 +3,14 @@
 namespace Api\Services\Petition;
 
 use Api\Http\Requests\v1\AddressRequest;
-use Api\Http\Requests\v1\MediaFileRequest;
 use Api\Http\Requests\v1\UserProfileRequest;
 use Api\Http\Requests\v1\UserRequest;
 use Api\Http\Requests\v1\UserRolesRequest;
-use Api\Repositories\AddressRepository;
-use Api\Repositories\User\UserProfileRepository;
-use Api\Repositories\User\UserRepository;
-use Api\Repositories\User\UserRolesRepository;
+use App\Repositories\AddressRepository;
+use App\Repositories\User\UserProfileRepository;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRolesRepository;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class UserService
@@ -20,13 +20,22 @@ class UserService
     protected $userProfile;
     protected $userRolesRepository;
 
-    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository,
-    UserProfileRepository $userProfile, UserRolesRepository $userRolesRepository)
+    public function __construct(
+        UserRepository $userRepository,
+        AddressRepository $addressRepository,
+        UserProfileRepository $userProfile,
+        UserRolesRepository $userRolesRepository
+    )
     {
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
         $this->userProfile = $userProfile;
         $this->userRolesRepository = $userRolesRepository;
+    }
+
+    public function show($user_id)
+    {
+        return $this->userRepository->show($user_id);
     }
 
     public function create(UserRequest $request)

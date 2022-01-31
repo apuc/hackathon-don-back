@@ -8,12 +8,12 @@ use Api\Http\Requests\v1\MediaFileRequest;
 use Api\Http\Requests\v1\PetitionHashTagRequest;
 use Api\Http\Requests\v1\PetitionMediaFileRequest;
 use Api\Http\Requests\v1\PetitionRequest;
-use Api\Repositories\AddressRepository;
-use Api\Repositories\Petition\IncidentCategoryPetitionRepository;
-use Api\Repositories\Petition\MediaFileRepository;
-use Api\Repositories\Petition\PetitionHashTagRepository;
-use Api\Repositories\Petition\PetitionMediaFileRepository;
-use Api\Repositories\Petition\PetitionRepository;
+use App\Repositories\AddressRepository;
+use App\Repositories\Petition\IncidentCategoryPetitionRepository;
+use App\Repositories\Petition\MediaFileRepository;
+use App\Repositories\Petition\PetitionHashTagRepository;
+use App\Repositories\Petition\PetitionMediaFileRepository;
+use App\Repositories\Petition\PetitionRepository;
 use App\Models\Petition;
 use Illuminate\Support\Facades\DB;
 

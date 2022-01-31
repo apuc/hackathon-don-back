@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories\User;
+namespace App\Repositories\User;
 
 
 use Api\Http\Requests\v1\UserRequest;
@@ -14,6 +14,11 @@ class UserRepository
     public function __construct(User $user)
     {
         $this->model = $user;
+    }
+
+    public function show($user_id)
+    {
+        return $this->model->find($user_id);
     }
 
     public function create(UserRequest $request)

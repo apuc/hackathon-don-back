@@ -2,9 +2,8 @@
 
 namespace Api\Http\Controllers\Api\v1;
 
-use Api\Repositories\IncidentCategory\IncidentCategoryRepository;
+use App\Repositories\IncidentCategory\IncidentCategoryRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IncidentCategoryController extends Controller

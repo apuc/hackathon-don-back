@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories;
+namespace App\Repositories;
 
 use Api\Http\Requests\v1\AddressRequest;
 use App\Models\Address;

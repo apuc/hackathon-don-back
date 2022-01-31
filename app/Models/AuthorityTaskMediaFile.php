@@ -9,31 +9,31 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
- * @property int $petition_id
+ * @property int $authority_task_id
  * @property int $mediafile_id
  * @property DateTime $created_at
  * @property DateTime $updated_at
  *
- * @property Petition $petition
- * @property MediaFile $mediafile
+ * @property AuthorityTask $authorityTask
+ * @property MediaFile $mediaFile
  */
-class PetitionMediaFile extends Model
+class AuthorityTaskMediaFile extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'petition_id',
+        'authority_task_id',
         'mediafile_id',
     ];
 
-    protected $table = 'petition_mediafile';
+    protected $table = 'mediafile';
 
-    public function petition(): BelongsTo
+    public function authorityTask(): BelongsTo
     {
-        return $this->belongsTo(Petition::class, 'petition_id');
+        return $this->belongsTo(AuthorityTask::class, 'authority_task_id');
     }
 
-    public function mediafile(): BelongsTo
+    public function mediaFile()
     {
         return $this->belongsTo(MediaFile::class, 'mediafile_id');
     }

@@ -2,11 +2,39 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $mnemonic_name
+ * @property string $description
+ * @property string $email
+ * @property string $email_ministry
+ * @property int $address_id
+ * @property string $phone
+ * @property int $responsible_id
+ * @property string $web_resource
+ * @property string $additional_information
+ * @property int $authority_type_id
+ * @property int $inform_by_email
+ * @property int $inform_by_sms
+ * @property int $gen_daily_report
+ * @property int $is_visible
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property Address $address
+ * @property AuthorityType $authorityType
+ * @property User $users
+ * @property District $district
+ * @property IncidentCategory $incidentCategory
+ * @property AuthorityTask $authorityTask
+ */
 class Authority extends Model
 {
     use HasFactory;
