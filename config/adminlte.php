@@ -268,6 +268,11 @@ return [
             'url'         => 'admin/petitions',
             'icon'        => 'fas fa-clipboard-list',
         ],
+        [
+            'text'        => 'Новости',
+            'url'         => 'admin/news',
+            'icon'        => 'fas fa-newspaper',
+        ],
 //        ['header' => 'account_settings'],
 //        [
 //            'text' => 'profile',
