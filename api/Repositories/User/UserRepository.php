@@ -2,7 +2,6 @@
 
 namespace Api\Repositories\User;
 
-
 use Api\Http\Requests\v1\UserRequest;
 use Api\Http\Resources\v1\UserResource;
 use App\Models\User;
@@ -28,11 +27,20 @@ class UserRepository
         }
     }
 
-    public function findById(int $user_id)
+    public function findById(int $userId): ?User
     {
-        return UserResource::make(
-            $this->model::with([
-                'userProfile',
-            ])->find($user_id));
+        return $this->model::with([
+            'userProfile',
+        ])->find($userId);
+    }
+
+    public function findByEmail(string $email): ?User
+    {
+        return $this->model::query()->where(['email' => $email])->first();
+    }
+
+    public function findByPhone(string $phone): ?User
+    {
+        return $this->model::query()->where(['phone' => $phone])->first();
     }
 }

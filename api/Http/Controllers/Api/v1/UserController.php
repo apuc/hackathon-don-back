@@ -2,10 +2,14 @@
 
 namespace Api\Http\Controllers\Api\v1;
 
+use Api\Http\Requests\v1\User\Notification\CheckAuthCodeRequest;
+use Api\Http\Requests\v1\User\Notification\SendAuthCodeRequest;
 use Api\Http\Requests\v1\UserRequest;
+use Api\Http\Resources\v1\UserResource;
 use Api\Repositories\User\UserRepository;
 use Api\Services\Petition\UserService;
 use App\Http\Controllers\Controller;
+use App\Notifications\AuthLoginNotification;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
@@ -19,31 +23,71 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function show($user_id): JsonResponse
+    public function show($userId): JsonResponse
     {
-        $user = $this->userRepository->findById($user_id);
+        $user = $this->userRepository->findById($userId);
 
-        if (empty($user)) {
+        if (!$user) {
             return response()->json('User not found', 404);
         }
 
-        return response()->json(['success' => true,
-            'data' => $user
-        ]);
+        return response()->json(
+            [
+                'success' => true,
+                'data'    => UserResource::make($user)
+            ]);
     }
 
     public function store(UserRequest $userRequest)
     {
-//        return response()->json(['success' => true,
-//            'data' => $userRequest->post()
-//        ]);
         try {
             $user = $this->userService->create($userRequest);
 
-            return $user;
-        } catch (\Throwable $e)
-        {
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+
+            return [
+                'user'  => $user,
+                'token' => $token
+            ];
+        } catch (\Throwable $e) {
             abort(500);
         }
+    }
+
+    public function sendAuthCode(SendAuthCodeRequest $userNotificationRequest)
+    {
+        $recipient = $userNotificationRequest['recipient'];
+        $user = $this->userRepository->findByEmail($recipient) ?? $this->userRepository->findByPhone($recipient);
+
+        if (!$user) {
+            return response()->json('User not found', 404);
+        }
+//TODO ---------------------------------
+        return response(['user_id' => $user->id], 200);
+
+        $code = mt_rand(1000, 9999);
+
+        $user->notify((new AuthLoginNotification($code)));
+
+        return response(['user_id' => $user->id], 200);
+    }
+
+    public function checkAuthCode(CheckAuthCodeRequest $request)
+    {
+        $user = $this->userRepository->findById($request['user_id']);
+
+        if (!$user) {
+            return response()->json('User not found', 404);
+        }
+//TODO ---------------------------------
+        if ($request['code'] === 1234) {
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+            $response = [ 'token' => $token ];
+
+            return response($response, 200);
+        }
+
+        $response = ["message" =>'User does not exist'];
+        return response($response, 422);
     }
 }

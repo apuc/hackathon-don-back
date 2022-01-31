@@ -20,8 +20,13 @@ class UserService
     protected $userProfile;
     protected $userRolesRepository;
 
-    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository,
-    UserProfileRepository $userProfile, UserRolesRepository $userRolesRepository)
+    public function __construct
+    (
+        UserRepository $userRepository,
+        AddressRepository $addressRepository,
+        UserProfileRepository $userProfile,
+        UserRolesRepository $userRolesRepository
+    )
     {
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
@@ -50,7 +55,7 @@ class UserService
                 $roles = $this->storeRoles($request['roles'], $user->id);
             }
 
-            return  $user;
+            return $user;
         });
     }
 
