@@ -80,7 +80,7 @@ class UserController extends Controller
             return response()->json('User not found', 404);
         }
 //TODO ---------------------------------
-        if ($request['code'] === 1234) {
+        if (1234 === (int)$request['code']) {
             $token = $user->createToken('Laravel Password Grant Client')->accessToken;
             $response = [ 'token' => $token ];
 

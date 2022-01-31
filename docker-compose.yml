@@ -9,7 +9,7 @@ services:
     depends_on:
       - app-php-fpm
     ports:
-      - "8080:80"
+      - "8020:80"
   app-php-fpm:
     build:
       context: ./docker/development/php-fpm

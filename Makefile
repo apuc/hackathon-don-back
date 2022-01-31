@@ -17,7 +17,7 @@ docker-pull:
 docker-build:
 	docker-compose build
 
-app-init: app-key-generate app-composer-install app-wait-db app-migrations app-seeders app-admin-lte-install app-passport-install
+app-init: app-composer-install app-key-generate app-wait-db app-migrations app-seeders app-admin-lte-install app-passport-install
 
 app-admin-lte-install:
 	docker-compose run --rm app-php-cli php artisan adminlte:install --no-interaction
