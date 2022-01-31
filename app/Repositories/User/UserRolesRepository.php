@@ -15,8 +15,6 @@ class UserRolesRepository
         if ($model->save()) {
             return $model;
         }
-        else {
-            throw new \DomainException('Saving error');
-        }
+        throw new \DomainException('Saving error');
     }
 }

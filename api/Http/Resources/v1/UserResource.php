@@ -2,7 +2,7 @@
 
 namespace Api\Http\Resources\v1;
 
-use Api\Http\Resources\v1\UserProfileResource;
+use App\Models\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -22,7 +22,8 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'status' => $this->status,
             'created_at' => $this->created_at,
-            'user-profile' => UserProfileResource::make($this->userProfile)
+            'user_profile' => UserProfileResource::make($this->userProfile),
+            'roles' => RolesResource::collection($this->roles),
         ];
     }
 }

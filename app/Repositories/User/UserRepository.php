@@ -4,8 +4,8 @@ namespace App\Repositories\User;
 
 
 use Api\Http\Requests\v1\UserRequest;
-use Api\Http\Resources\v1\UserResource;
 use App\Models\User;
+use DomainException;
 
 class UserRepository
 {
@@ -16,7 +16,7 @@ class UserRepository
         $this->model = $user;
     }
 
-    public function show($user_id)
+    public function findById($user_id)
     {
         return $this->model->find($user_id);
     }
@@ -28,16 +28,6 @@ class UserRepository
         if ($this->model->save()) {
             return $this->model;
         }
-        else {
-            throw new \DomainException('Saving error');
-        }
-    }
-
-    public function findById(int $user_id)
-    {
-        return UserResource::make(
-            $this->model::with([
-                'userProfile',
-            ])->find($user_id));
+        throw new DomainException('User save error');
     }
 }

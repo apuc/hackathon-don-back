@@ -21,8 +21,6 @@ class AddressRepository
         if ($this->model->save()) {
             return $this->model;
         }
-        else {
-            throw new \DomainException('Saving error');
-        }
+        throw new \DomainException('Saving error');
     }
 }
