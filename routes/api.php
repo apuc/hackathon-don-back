@@ -30,7 +30,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::prefix('user')->group(function () {
         Route::get('show/{user_id}', [ UserController::class, 'show'])->name('show');
-        Route::post('store', [ UserController::class, 'store'])->name('store');
+        Route::post('store', [ UserController::class, 'store'])->name('store')->withoutMiddleware('auth:api');
         Route::post('send-auth-code', [ UserController::class, 'sendAuthCode' ])
             ->name('sendAuthCode')
             ->withoutMiddleware('auth:api')

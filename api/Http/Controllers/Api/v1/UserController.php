@@ -50,7 +50,7 @@ class UserController extends Controller
                 'token' => $token
             ];
         } catch (\Throwable $e) {
-            abort(500);
+            abort(500, $e->getMessage());
         }
     }
 
