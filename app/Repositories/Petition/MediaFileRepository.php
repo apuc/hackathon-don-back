@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories\Petition;
+namespace App\Repositories\Petition;
 
 use Api\Http\Requests\v1\MediaFileRequest;
 use App\Models\MediaFile;

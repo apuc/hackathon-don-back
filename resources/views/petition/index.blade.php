@@ -37,13 +37,13 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" style="table-layout: fixed;">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
 
-										<th>User Id</th>
-										<th>Address Id</th>
+										<th>User</th>
+										<th>Address</th>
 										<th>Status</th>
 										<th>Description</th>
 										<th>Rating</th>
@@ -57,8 +57,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $petition->user_id }}</td>
-											<td>{{ $petition->address_id }}</td>
+											<td>{{ $petition->user->name }}</td>
+											<td>{{ $petition->address->explanation }}</td>
                                             <td>
                                                 @if($petition->status === 1)
                                                     Активен

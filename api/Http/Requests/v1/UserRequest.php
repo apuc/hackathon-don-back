@@ -25,9 +25,10 @@ class UserRequest extends FormRequest
     {
         return [
 
-            'name' => 'required|string',
+            'name' => 'string',
             'password' => 'required',
             'email' => 'email',
+            'phone' => 'required|numeric',
 
             'address' => 'array|required',
             'address.longitude' => 'required',

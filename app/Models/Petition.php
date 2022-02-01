@@ -2,13 +2,33 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $address_id
+ * @property int $status
+ * @property string $description
+ * @property int $rating
+ * @property int $views
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property User $user
+ * @property Address $address
+ * @property PetitionLog $petitionLog
+ * @property AuthorityTask $authorityTask
+ * @property PetitionViews $petitionViews
+ * @property IncidentCategory $incidentCategory
+ * @property MediaFile $mediaFile
+ * @property HashTag $hashTag
+ */
 class Petition extends Model
 {
     use HasFactory;

@@ -2,10 +2,21 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $role_id
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property Role $role
+ * @property User $users
+ */
 class UserRoles extends Model
 {
     use HasFactory;

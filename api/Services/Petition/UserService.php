@@ -3,81 +3,86 @@
 namespace Api\Services\Petition;
 
 use Api\Http\Requests\v1\AddressRequest;
-use Api\Http\Requests\v1\MediaFileRequest;
 use Api\Http\Requests\v1\UserProfileRequest;
 use Api\Http\Requests\v1\UserRequest;
 use Api\Http\Requests\v1\UserRolesRequest;
-use Api\Repositories\AddressRepository;
-use Api\Repositories\User\UserProfileRepository;
-use Api\Repositories\User\UserRepository;
-use Api\Repositories\User\UserRolesRepository;
+use App\Repositories\AddressRepository;
+use App\Repositories\User\UserProfileRepository;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRolesRepository;
 use Illuminate\Support\Facades\DB;
 
 class UserService
 {
     protected $userRepository;
     protected $addressRepository;
-    protected $userProfile;
+    protected $userProfileRepository;
     protected $userRolesRepository;
 
-    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository,
-    UserProfileRepository $userProfile, UserRolesRepository $userRolesRepository)
-    {
+    public function __construct(
+        UserRepository        $userRepository,
+        AddressRepository     $addressRepository,
+        UserProfileRepository $userProfileRepository,
+        UserRolesRepository   $userRolesRepository
+    ){
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
-        $this->userProfile = $userProfile;
+        $this->userProfileRepository = $userProfileRepository;
         $this->userRolesRepository = $userRolesRepository;
+    }
+
+    public function show($user_id)
+    {
+        return $this->userRepository->findById($user_id);
     }
 
     public function create(UserRequest $request)
     {
         return DB::transaction(function () use ($request){
-
-            $address = $this->storeAddress($request['address']);
-
             $user = $this->storeUser($request);
-
-            if (!empty($request['fio'])) {
-
-                $path = null;
-                if (!empty($request['photo'])) {
-                    $path = $this->storePhoto($request);
-                }
-                $profile = $this->storeProfile($address->id, $user->id, $request['fio'], $path);
-            }
-
-            if (!empty($request['roles'])) {
-                $roles = $this->storeRoles($request['roles'], $user->id);
-            }
+            $this->storeProfile($request, $user->id);
+            $this->storeRoles($request, $user->id);
 
             return  $user;
         });
     }
 
-    private function storeRoles($roles, $user_id)
+    private function storeRoles($request, $user_id)
     {
-        $rolesArr = array();
-        foreach ($roles as $role)
-        {
-            $data = $role;
-            $data['user_id'] = $user_id;
+        if (!empty($request['roles'])) {
+            foreach ($request['roles'] as $role)
+            {
+                $data = $role;
+                $data['user_id'] = $user_id;
 
-            $userRolesRequest = new UserRolesRequest();
-            $userRolesRequest->merge($data);
+                $userRolesRequest = new UserRolesRequest();
+                $userRolesRequest->merge($data);
 
-            $rolesArr[] = $this->userRolesRepository->create($userRolesRequest);
+                $this->userRolesRepository->create($userRolesRequest);
+            }
         }
-        return $rolesArr;
     }
 
-    private function storeProfile($address_id, $user_id, $fio, $path=null)
+    private function storeProfile($request, $user_id)
     {
-        $data = ['address_id' => $address_id, 'user_id' => $user_id, 'photo' => $path, 'fio' => $fio];
+        if (!empty($request['fio'])) {
+            $address = $this->storeAddress($request['address']);
 
-        $profileRequest = new UserProfileRequest();
-        $profileRequest->merge($data);
+            $path = null;
+            if (!empty($request['photo'])) {
+                $path = $this->storePhoto($request);
+            }
 
-        return $this->userProfile->create($profileRequest);
+            $profileRequest = new UserProfileRequest();
+            $profileRequest->merge([
+                'address_id' => $address->id,
+                'user_id' => $user_id,
+                'photo' => $path,
+                'fio' => $request['fio']
+            ]);
+
+            $this->userProfileRepository->create($profileRequest);
+        }
     }
 
     private function storePhoto($request)

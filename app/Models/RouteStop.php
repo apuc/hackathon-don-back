@@ -8,20 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $authority_task_id
- * @property int $log_type_id
- * @property DateTime $datetime
+ * @property int $transport_route_id
+ * @property int $transport_stop_id
  * @property DateTime $created_at
  * @property DateTime $updated_at
  */
-class AuthorityTaskLog extends Model
+class RouteStop extends Model
 {
     use HasFactory;
 
+    use HasFactory;
+
     protected $fillable = [
-        'authority_task_id',
-        'log_type_id',
+        'transport_route_id',
+        'transport_stop_id',
     ];
 
-    protected $table = 'authority_task_log';
+    protected $table = 'transport_stop';
 }
