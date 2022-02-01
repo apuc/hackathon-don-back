@@ -16,18 +16,18 @@ class UserService
 {
     protected $userRepository;
     protected $addressRepository;
-    protected $userProfile;
+    protected $userProfileRepository;
     protected $userRolesRepository;
 
     public function __construct(
-        UserRepository $userRepository,
-        AddressRepository $addressRepository,
-        UserProfileRepository $userProfile,
-        UserRolesRepository $userRolesRepository
+        UserRepository        $userRepository,
+        AddressRepository     $addressRepository,
+        UserProfileRepository $userProfileRepository,
+        UserRolesRepository   $userRolesRepository
     ){
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
-        $this->userProfile = $userProfile;
+        $this->userProfileRepository = $userProfileRepository;
         $this->userRolesRepository = $userRolesRepository;
     }
 
@@ -81,7 +81,7 @@ class UserService
                 'fio' => $request['fio']
             ]);
 
-            $this->userProfile->create($profileRequest);
+            $this->userProfileRepository->create($profileRequest);
         }
     }
 
