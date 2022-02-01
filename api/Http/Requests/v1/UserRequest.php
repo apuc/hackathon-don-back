@@ -30,9 +30,9 @@ class UserRequest extends FormRequest
             'email' => 'email',
             'phone' => 'required|numeric',
 
-            'address' => 'array|required',
-            'address.longitude' => 'required',
-            'address.latitude' => 'required',
+            'address' => 'array',
+            'address.longitude' => 'string',
+            'address.latitude' => 'string',
             'address.explanation' => 'string',
 
             'fio' => 'string',
