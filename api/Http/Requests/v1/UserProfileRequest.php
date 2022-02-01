@@ -29,7 +29,7 @@ class UserProfileRequest extends FormRequest
             'photo' => 'mimes:jpeg,bmp,png',
 
             'user_id' => 'required|integer',
-            'address_id' => 'required|integer',
+            'address_id' => 'integer',
 
         ];
 

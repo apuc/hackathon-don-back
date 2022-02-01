@@ -67,7 +67,14 @@ class UserService
     private function storeProfile($request, $user_id)
     {
         if (!empty($request['fio'])) {
-            $address = $this->storeAddress($request['address']);
+
+            $addressId = null;
+            if(!empty($request['address']))
+            {
+                $address = $this->storeAddress($request['address']);
+                $addressId = $address->id;
+            }
+
 
             $path = null;
             if (!empty($request['photo'])) {
@@ -76,7 +83,7 @@ class UserService
 
             $profileRequest = new UserProfileRequest();
             $profileRequest->merge([
-                'address_id' => $address->id,
+                'address_id' => $addressId,
                 'user_id' => $user_id,
                 'photo' => $path,
                 'fio' => $request['fio']
