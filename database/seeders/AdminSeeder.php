@@ -21,6 +21,10 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('password',),
             'email' => 'admin@mail.com',
             'created_at' => now(),
+            'confirm_email_code' => Str::random(4),
+            'confirm_sms_code' => Str::random(4),
+            'phone' => mt_rand(1000000000, 9999999999),
+            'remember_token' => Str::random(10),
         ]);
         DB::table('user_roles')->insert([
             'user_id' => '1',

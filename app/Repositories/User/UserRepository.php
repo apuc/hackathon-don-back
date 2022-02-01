@@ -6,6 +6,8 @@ namespace App\Repositories\User;
 use Api\Http\Requests\v1\UserRequest;
 use App\Models\User;
 use DomainException;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserRepository
 {
@@ -23,7 +25,14 @@ class UserRepository
 
     public function create(UserRequest $request)
     {
-        $this->model->fill($request->all());
+        $this->model->fill(array(
+            'name' => $request['name'],
+            'password' => Hash::make($request['password']),
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'confirm_sms_code' => Str::random(4),
+            'confirm_email_code' => Str::random(4),
+        ));
 
         if ($this->model->save()) {
             return $this->model;

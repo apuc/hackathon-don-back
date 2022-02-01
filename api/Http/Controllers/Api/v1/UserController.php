@@ -6,16 +6,13 @@ use Api\Http\Requests\v1\UserRequest;
 use Api\Http\Resources\v1\UserResource;
 use Api\Services\Petition\UserService;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Repositories\User\UserRepository;
-use Illuminate\Http\JsonResponse;
 use Throwable;
 
 class UserController extends Controller
 {
     protected $userService;
 
-    public function __construct(UserRepository $userRepository, UserService $userService)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
