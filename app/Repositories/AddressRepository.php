@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories;
+namespace App\Repositories;
 
 use Api\Http\Requests\v1\AddressRequest;
 use App\Models\Address;
@@ -21,8 +21,6 @@ class AddressRepository
         if ($this->model->save()) {
             return $this->model;
         }
-        else {
-            throw new \DomainException('Saving error');
-        }
+        throw new \DomainException('Saving error');
     }
 }

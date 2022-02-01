@@ -15,24 +15,25 @@ class RolesSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'title' => 'Водитель',
-            'mnemonic_name' => 'водитель',
+            'title' => 'admin',
+            'mnemonic_name' => 'Administrator',
             'created_at' => now(),
         ]);
         DB::table('roles')->insert([
-            'title' => 'Пользователь',
-            'mnemonic_name' => 'дорога',
+            'title' => 'driver',
+            'mnemonic_name' => 'Driver',
             'created_at' => now(),
         ]);
         DB::table('roles')->insert([
-            'title' => 'Модератор',
-            'mnemonic_name' => 'модератор',
+            'title' => 'user',
+            'mnemonic_name' => 'User',
             'created_at' => now(),
         ]);
         DB::table('roles')->insert([
-            'title' => 'Администратор',
-            'mnemonic_name' => 'админ',
+            'title' => 'moderator',
+            'mnemonic_name' => 'Moderator',
             'created_at' => now(),
         ]);
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $mnemonic_name
+ * @property string $icon
+ * @property int $rating
+ * @property int $status
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property Petition $petition
+ * @property Authority $authority
+ * @property HashTag $hashTag
+ */
 class IncidentCategory extends Model
 {
     use HasFactory;

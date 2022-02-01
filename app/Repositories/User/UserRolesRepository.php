@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Repositories\User;
+namespace App\Repositories\User;
 
 use Api\Http\Requests\v1\UserRolesRequest;
 use App\Models\UserRoles;
@@ -15,8 +15,6 @@ class UserRolesRepository
         if ($model->save()) {
             return $model;
         }
-        else {
-            throw new \DomainException('Saving error');
-        }
+        throw new \DomainException('Saving error');
     }
 }

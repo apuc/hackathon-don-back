@@ -6,22 +6,23 @@ use Api\Http\Requests\v1\User\Notification\CheckAuthCodeRequest;
 use Api\Http\Requests\v1\User\Notification\SendAuthCodeRequest;
 use Api\Http\Requests\v1\UserRequest;
 use Api\Http\Resources\v1\UserResource;
+
 use Api\Repositories\User\UserRepository;
 use Api\Services\Petition\UserService;
 use App\Http\Controllers\Controller;
-use App\Notifications\AuthLoginNotification;
 use Illuminate\Http\JsonResponse;
+use Throwable;
+
 
 class UserController extends Controller
 {
-    protected $userRepository;
     protected $userService;
 
-    public function __construct(UserRepository $userRepository, UserService $userService)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
         $this->userService = $userService;
     }
+
 
     public function show($userId): JsonResponse
     {
@@ -36,6 +37,7 @@ class UserController extends Controller
                 'success' => true,
                 'data'    => UserResource::make($user)
             ]);
+
     }
 
     public function store(UserRequest $userRequest)
@@ -89,5 +91,6 @@ class UserController extends Controller
 
         $response = ["message" =>'User does not exist'];
         return response($response, 422);
+
     }
 }

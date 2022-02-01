@@ -1,10 +1,8 @@
 <?php
 
-namespace Api\Repositories\User;
-
+namespace App\Repositories\User;
 
 use Api\Http\Requests\v1\UserProfileRequest;
-use Api\Http\Resources\v1\UserResource;
 use App\Models\UserProfile;
 
 class UserProfileRepository
@@ -26,13 +24,5 @@ class UserProfileRepository
         else {
             throw new \DomainException('Saving error');
         }
-    }
-
-    public function findById(int $user_id)
-    {
-        return UserResource::make(
-            $this->model::with([
-                'userProfile',
-            ])->find($user_id));
     }
 }

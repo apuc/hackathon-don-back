@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,6 +12,29 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $password
+ * @property string $email
+ * @property string $phone
+ * @property int $status
+ * @property string $confirm_sms_code
+ * @property string $confirm_email_code
+ * @property string $remember_token
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property Address $address
+ * @property Role $roles
+ * @property News $news
+ * @property UserProfile $userProfile
+ * @property Petition $petition
+ * @property PetitionViews $petitionViews
+ * @property NewsViews $newsViews
+ * @property AuthorityTask $authorityTask
+ * @property Authority $authority
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -47,6 +71,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public const ROLE_ADMIN = 1;
+    public const ROLE_DRIVER = 2;
+    public const ROLE_USER = 3;
+    public const ROLE_MODERATOR = 4;
+
+    public static function getRoles(): array
+    {
+        return [
+            self::ROLE_ADMIN => 'Administrator',
+            self::ROLE_DRIVER => 'Driver',
+            self::ROLE_USER => 'User',
+            self::ROLE_MODERATOR => 'Moderator',
+        ];
+    }
+
+    public function isAdmin(): bool
+    {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->id === self::ROLE_ADMIN) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function address(): HasOneThrough // TODO check this connection
     {
         return $this->hasOneThrough(Address::class, UserProfile::class);
@@ -54,7 +103,7 @@ class User extends Authenticatable
 
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'user_roles')->withTimestamps();
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id')->withTimestamps();
     }
 
     public function news(): BelongsToMany

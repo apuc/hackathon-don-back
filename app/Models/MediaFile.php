@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property int $id
+ * @property string $path
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ *
+ * @property PetitionMediaFile $petitionMediaFile
+ * @property AuthorityTaskMediaFile $authorityTaskMediaFile
+ */
 class MediaFile extends Model
 {
     use HasFactory;
@@ -18,11 +28,11 @@ class MediaFile extends Model
 
     public function authorityTaskMediaFile(): BelongsToMany
     {
-        return $this->belongsToMany(Authority::class, 'authority_task_mediafile')->withTimestamps();
+        return $this->belongsToMany(AuthorityTaskMediaFile::class, 'authority_task_mediafile')->withTimestamps();
     }
 
-    public function PetitionMediaFile(): BelongsToMany
+    public function petitionMediaFile(): BelongsToMany
     {
-        return $this->belongsToMany(Authority::class, 'petition_task_mediafile')->withTimestamps();
+        return $this->belongsToMany(PetitionMediaFile::class, 'petition_task_mediafile')->withTimestamps();
     }
 }

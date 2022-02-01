@@ -1,9 +1,7 @@
 <?php
 
-namespace Api\Repositories\IncidentCategory;
+namespace App\Repositories\IncidentCategory;
 
-
-use Api\Http\Resources\v1\IncidentCategoryResource;
 use App\Models\IncidentCategory;
 
 class IncidentCategoryRepository
@@ -17,13 +15,11 @@ class IncidentCategoryRepository
 
     public function findById(int $category_id)
     {
-        return IncidentCategoryResource::make(
-            $this->model::find($category_id));
+        return $this->model::find($category_id);
     }
 
     public function getAll()
     {
-        return IncidentCategoryResource::collection(
-            $this->model::all());
+        return $this->model::all();
     }
 }
