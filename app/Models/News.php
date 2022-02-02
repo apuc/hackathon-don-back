@@ -25,13 +25,22 @@ class News extends Model
         'user_id',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'news';
 
+    /**
+     * @return BelongsTo
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(IncidentCategory::class, 'news_category_id', 'id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

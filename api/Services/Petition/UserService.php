@@ -19,7 +19,12 @@ class UserService
     protected $userProfileRepository;
     protected $userRolesRepository;
 
-
+    /**
+     * @param UserRepository $userRepository
+     * @param AddressRepository $addressRepository
+     * @param UserProfileRepository $userProfileRepository
+     * @param UserRolesRepository $userRolesRepository
+     */
     public function __construct(
         UserRepository        $userRepository,
         AddressRepository     $addressRepository,
@@ -32,11 +37,19 @@ class UserService
         $this->userRolesRepository = $userRolesRepository;
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
     public function show($user_id)
     {
         return $this->userRepository->findById($user_id);
     }
 
+    /**
+     * @param UserRequest $request
+     * @return mixed
+     */
     public function create(UserRequest $request)
     {
         return DB::transaction(function () use ($request){
@@ -48,6 +61,10 @@ class UserService
         });
     }
 
+    /**
+     * @param $request
+     * @param $user_id
+     */
     private function storeRoles($request, $user_id)
     {
         if (!empty($request['roles'])) {
@@ -64,6 +81,10 @@ class UserService
         }
     }
 
+    /**
+     * @param $request
+     * @param $user_id
+     */
     private function storeProfile($request, $user_id)
     {
         if (!empty($request['fio'])) {
@@ -93,16 +114,28 @@ class UserService
         }
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     private function storePhoto($request)
     {
         return $request->file('photo')->store('uploads', 'public');
     }
 
+    /**
+     * @param $request
+     * @return \App\Models\User
+     */
     private function storeUser($request)
     {
         return $this->userRepository->create($request);
     }
 
+    /**
+     * @param $data
+     * @return \App\Models\Address
+     */
     private function storeAddress($data)
     {
         $addressRequest = new AddressRequest();

@@ -35,24 +35,38 @@ class IncidentCategory extends Model
         'rating',
         'status',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'incident_category';
 
+    /**
+     * @return BelongsToMany
+     */
     public function petition(): BelongsToMany
     {
         return $this->belongsToMany(Petition::class, 'incident_category_petition')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function authority(): BelongsToMany
     {
         return $this->belongsToMany(Authority::class, 'authority_incident_category')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function hashTag(): BelongsToMany
     {
         return $this->belongsToMany(HashTag::class, 'incident_category_hash_tag')->withTimestamps();
     }
 
+    /**
+     * @return HasMany
+     */
     public function news(): HasMany
     {
         return $this->hasMany(News::class);

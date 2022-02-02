@@ -13,11 +13,18 @@ class PetitionController extends Controller
 {
     protected $petitionService;
 
+    /**
+     * @param PetitionService $service
+     */
     public function __construct(PetitionService $service)
     {
         $this->petitionService = $service;
     }
 
+    /**
+     * @param $petition_id
+     * @return JsonResponse
+     */
     public function show($petition_id): JsonResponse
     {
         $petition = $this->petitionService->show($petition_id);
@@ -31,6 +38,10 @@ class PetitionController extends Controller
         ]);
     }
 
+    /**
+     * @param $user_id
+     * @return JsonResponse
+     */
     public function showByUser($user_id): JsonResponse
     {
         $petitions = $this->petitionService->showByUser($user_id);
@@ -44,6 +55,10 @@ class PetitionController extends Controller
         ]);
     }
 
+    /**
+     * @param PetitionRequest $petitionRequest
+     * @return JsonResponse
+     */
     public function store(PetitionRequest $petitionRequest): JsonResponse
     {
         try {

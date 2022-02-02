@@ -26,13 +26,22 @@ class PetitionHashTag extends Model
         'hash_tag_id',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'petition_hash_tag';
 
+    /**
+     * @return BelongsTo
+     */
     public function hashtag(): BelongsTo
     {
         return $this->belongsTo(HashTag::class, 'hash_tag_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class, 'petition_id');

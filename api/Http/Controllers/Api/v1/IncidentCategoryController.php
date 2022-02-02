@@ -11,11 +11,18 @@ class IncidentCategoryController extends Controller
 {
     protected $incidentCategoryService;
 
+    /**
+     * @param IncidentCategoryService $incidentCategoryService
+     */
     public function __construct(IncidentCategoryService $incidentCategoryService)
     {
         $this->incidentCategoryService = $incidentCategoryService;
     }
 
+    /**
+     * @param null $category_id
+     * @return JsonResponse
+     */
     public function show($category_id = null): JsonResponse
     {
         $categories = $this->incidentCategoryService->show($category_id);

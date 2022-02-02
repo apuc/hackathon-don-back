@@ -27,6 +27,14 @@ class PetitionService
     protected $petitionMediaFileRepository;
     protected $mediaFileRepository;
 
+    /**
+     * @param AddressRepository $addressRepository
+     * @param PetitionRepository $petitionRepository
+     * @param PetitionHashTagRepository $petitionHasTagRepository
+     * @param IncidentCategoryPetitionRepository $categoryPetitionRepository
+     * @param PetitionMediaFileRepository $petitionMediaFileRepository
+     * @param MediaFileRepository $mediaFileRepository
+     */
     public function __construct(
         AddressRepository                  $addressRepository,
         PetitionRepository                 $petitionRepository,
@@ -43,16 +51,28 @@ class PetitionService
         $this->mediaFileRepository = $mediaFileRepository;
     }
 
+    /**
+     * @param $petition_id
+     * @return mixed
+     */
     public function show($petition_id)
     {
         return $this->petitionRepository->findById($petition_id);
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
     public function showByUser($user_id)
     {
         return $this->petitionRepository->findByUserId($user_id);
     }
 
+    /**
+     * @param PetitionRequest $request
+     * @return mixed
+     */
     public function create(PetitionRequest $request)
     {
         return DB::transaction(function () use ($request){
@@ -68,6 +88,10 @@ class PetitionService
         });
     }
 
+    /**
+     * @param $request
+     * @param $petition_id
+     */
     private function storeVideo($request, $petition_id)
     {
         if (!empty($request['video'])) {
@@ -76,6 +100,10 @@ class PetitionService
         }
     }
 
+    /**
+     * @param $request
+     * @param $petition_id
+     */
     private function storePhoto($request, $petition_id)
     {
         if (!empty($request['photo'])) {
@@ -86,6 +114,10 @@ class PetitionService
         }
     }
 
+    /**
+     * @param $path
+     * @return \App\Models\MediaFile
+     */
     protected function storeMediaFile($path)
     {
         $mediaFileRequest = new MediaFileRequest();
@@ -94,6 +126,10 @@ class PetitionService
         return $this->mediaFileRepository->create($mediaFileRequest);
     }
 
+    /**
+     * @param $petition_id
+     * @param $mediafile_id
+     */
     protected  function storeMediaFileForPetition($petition_id, $mediafile_id)
     {
         $petitionMediaFileRequest = new PetitionMediaFileRequest();
@@ -102,6 +138,10 @@ class PetitionService
         $this->petitionMediaFileRepository->create($petitionMediaFileRequest);
     }
 
+    /**
+     * @param $request
+     * @param $petition_id
+     */
     private function storeIncidentCategory($request, $petition_id)
     {
         if (!empty($request['incident_category'])) {
@@ -115,6 +155,10 @@ class PetitionService
         }
     }
 
+    /**
+     * @param $request
+     * @param $petition_id
+     */
     private function storeHashTags($request, $petition_id)
     {
         if (!empty($request['hashtag'])) {
@@ -128,6 +172,10 @@ class PetitionService
         }
     }
 
+    /**
+     * @param $data
+     * @return Address
+     */
     private function storeAddress($data): Address
     {
         $addressRequest = new AddressRequest();
@@ -136,6 +184,11 @@ class PetitionService
         return $this->addressRepository->create($addressRequest);
     }
 
+    /**
+     * @param $request
+     * @param $address_id
+     * @return Petition
+     */
     private function storePetition($request, $address_id): Petition
     {
         $request['address_id'] = $address_id;

@@ -8,6 +8,10 @@ use App\Models\IncidentCategoryPetition;
 
 class IncidentCategoryPetitionRepository
 {
+    /**
+     * @param IncidentCategoryPetitionRequest $request
+     * @return IncidentCategoryPetition
+     */
     public function create(IncidentCategoryPetitionRequest $request)
     {
         $model = new IncidentCategoryPetition();

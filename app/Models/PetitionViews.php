@@ -26,13 +26,22 @@ class PetitionViews extends Model
         'petition_id',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'petition_views';
 
+    /**
+     * @return BelongsTo
+     */
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class);

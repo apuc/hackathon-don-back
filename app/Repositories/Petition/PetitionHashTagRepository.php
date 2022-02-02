@@ -8,6 +8,10 @@ use App\Models\PetitionHashTag;
 
 class PetitionHashTagRepository
 {
+    /**
+     * @param PetitionHashTagRequest $request
+     * @return PetitionHashTag
+     */
     public function create(PetitionHashTagRequest $request)
     {
         $model = new PetitionHashTag();

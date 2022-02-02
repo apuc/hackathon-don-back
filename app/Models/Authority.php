@@ -56,34 +56,54 @@ class Authority extends Model
         'gen_daily_report',
         'is_visible',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'authority';
 
+    /**
+     * @return BelongsTo
+     */
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function authorityType(): BelongsTo
     {
         return $this->belongsTo(AuthorityType::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'responsible_id');
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function district(): BelongsToMany
     {
         return $this->belongsToMany(District::class, 'authority_district')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function incidentCategory(): BelongsToMany
     {
         return $this->belongsToMany(IncidentCategory::class, 'authority_incident_category')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function authorityTask(): BelongsToMany
     {
         return $this->belongsToMany(AuthorityTask::class, 'authority_authority_task')->withTimestamps();

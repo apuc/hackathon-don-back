@@ -11,18 +11,32 @@ use Illuminate\Support\Str;
 
 class UserRepository
 {
+    /**
+     * @var User
+     */
     protected $model;
 
+    /**
+     * @param User $user
+     */
     public function __construct(User $user)
     {
         $this->model = $user;
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
     public function findById($user_id)
     {
         return $this->model->find($user_id);
     }
 
+    /**
+     * @param UserRequest $request
+     * @return User
+     */
     public function create(UserRequest $request)
     {
         $this->model->fill(array(

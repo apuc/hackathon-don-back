@@ -9,6 +9,8 @@ use Api\Http\Resources\v1\UserResource;
 use Api\Repositories\User\UserRepository;
 use Api\Services\Petition\UserService;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 
 
@@ -17,13 +19,20 @@ class UserController extends Controller
     protected $userService;
     protected $userRepository;
 
+    /**
+     * @param UserService $userService
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserService $userService, UserRepository $userRepository)
     {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
     }
 
-
+    /**
+     * @param $userId
+     * @return JsonResponse
+     */
     public function show($userId): JsonResponse
     {
         $user = $this->userRepository->findById($userId);
@@ -40,6 +49,10 @@ class UserController extends Controller
 
     }
 
+    /**
+     * @param UserRequest $userRequest
+     * @return array|void
+     */
     public function store(UserRequest $userRequest)
     {
         try {
@@ -56,6 +69,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param SendAuthCodeRequest $userNotificationRequest
+     * @return Application|ResponseFactory|JsonResponse|\Illuminate\Http\Response
+     */
     public function sendAuthCode(SendAuthCodeRequest $userNotificationRequest)
     {
         $recipient = $userNotificationRequest['recipient'];
@@ -74,6 +91,10 @@ class UserController extends Controller
         return response(['user_id' => $user->id], 200);
     }
 
+    /**
+     * @param CheckAuthCodeRequest $request
+     * @return Application|ResponseFactory|JsonResponse|\Illuminate\Http\Response
+     */
     public function checkAuthCode(CheckAuthCodeRequest $request)
     {
         $user = $this->userRepository->findById($request['user_id']);

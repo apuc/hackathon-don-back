@@ -7,6 +7,10 @@ use App\Models\MediaFile;
 
 class MediaFileRepository
 {
+    /**
+     * @param MediaFileRequest $request
+     * @return MediaFile
+     */
     public function create(MediaFileRequest $request)
     {
         $model = new MediaFile();
