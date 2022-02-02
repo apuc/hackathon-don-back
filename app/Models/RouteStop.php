@@ -17,12 +17,12 @@ class RouteStop extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $fillable = [
         'transport_route_id',
         'transport_stop_id',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'transport_stop';
 }

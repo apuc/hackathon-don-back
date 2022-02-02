@@ -22,5 +22,8 @@ class TransportRoute extends Model
         'route_number',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'transport_route';
 }

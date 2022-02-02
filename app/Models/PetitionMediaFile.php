@@ -26,13 +26,22 @@ class PetitionMediaFile extends Model
         'mediafile_id',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'petition_mediafile';
 
+    /**
+     * @return BelongsTo
+     */
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class, 'petition_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function mediafile(): BelongsTo
     {
         return $this->belongsTo(MediaFile::class, 'mediafile_id');

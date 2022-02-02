@@ -27,13 +27,22 @@ class PetitionLog extends Model
         'log_type_id',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'petition_log';
 
+    /**
+     * @return BelongsTo
+     */
     public function logType(): BelongsTo
     {
         return $this->belongsTo(LogType::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class);

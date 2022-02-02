@@ -7,6 +7,10 @@ use App\Models\PetitionMediaFile;
 
 class PetitionMediaFileRepository
 {
+    /**
+     * @param PetitionMediaFileRequest $request
+     * @return PetitionMediaFile
+     */
     public function create(PetitionMediaFileRequest $request)
     {
         $model = new PetitionMediaFile();

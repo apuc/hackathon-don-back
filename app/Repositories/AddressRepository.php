@@ -7,13 +7,23 @@ use App\Models\Address;
 
 class AddressRepository
 {
+    /**
+     * @var Address
+     */
     protected $model;
 
+    /**
+     * @param Address $address
+     */
     public function __construct(Address $address)
     {
         $this->model = $address;
     }
 
+    /**
+     * @param AddressRequest $request
+     * @return Address
+     */
     public function create(AddressRequest $request)
     {
         $this->model->fill($request->all());

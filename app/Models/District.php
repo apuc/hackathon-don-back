@@ -26,9 +26,14 @@ class District extends Model
         'city_id',
         'is_supported',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'district';
 
+    /**
+     * @return BelongsToMany
+     */
     public function authority(): BelongsToMany
     {
         return $this->belongsToMany(Authority::class, 'authority_district')->withTimestamps();

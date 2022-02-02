@@ -23,14 +23,22 @@ class MediaFile extends Model
     protected $fillable = [
         'path',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'mediafile';
 
+    /**
+     * @return BelongsToMany
+     */
     public function authorityTaskMediaFile(): BelongsToMany
     {
         return $this->belongsToMany(AuthorityTaskMediaFile::class, 'authority_task_mediafile')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function petitionMediaFile(): BelongsToMany
     {
         return $this->belongsToMany(PetitionMediaFile::class, 'petition_task_mediafile')->withTimestamps();

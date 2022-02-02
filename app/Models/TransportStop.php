@@ -28,14 +28,22 @@ class TransportStop extends Model
         'management_company',
         'address_id',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'transport_stop';
 
+    /**
+     * @return BelongsTo
+     */
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function routeStop(): BelongsToMany
     {
         return $this->belongsToMany(RouteStop::class, 'route_stop')->withTimestamps();

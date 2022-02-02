@@ -10,11 +10,18 @@ class NewsController extends Controller
 {
     protected $newsRepository;
 
+    /**
+     * @param NewsRepository $news
+     */
     public function __construct(NewsRepository $news)
     {
         $this->newsRepository = $news;
     }
 
+    /**
+     * @param null $category_id
+     * @return JsonResponse
+     */
     public function show($category_id = null): JsonResponse
     {
         if(!empty($category_id)) {

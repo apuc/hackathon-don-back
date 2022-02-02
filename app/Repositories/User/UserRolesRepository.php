@@ -7,6 +7,10 @@ use App\Models\UserRoles;
 
 class UserRolesRepository
 {
+    /**
+     * @param UserRolesRequest $request
+     * @return UserRoles
+     */
     public function create(UserRolesRequest $request)
     {
         $model = new UserRoles();

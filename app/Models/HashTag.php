@@ -23,14 +23,22 @@ class HashTag extends Model
     protected $fillable = [
         'title',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'hash_tag';
 
+    /**
+     * @return BelongsToMany
+     */
     public function news(): BelongsToMany
     {
         return $this->belongsToMany(News::class, 'hash_tag_news')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function petition(): BelongsToMany
     {
         return $this->belongsToMany(Petition::class, 'petition_hash_tag')->withTimestamps();
