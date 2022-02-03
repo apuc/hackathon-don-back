@@ -48,8 +48,8 @@ class PetitionService
     {
         return DB::transaction(function () use ($request){
 
-            $address = $this->storeAddress($request['address']);
-            $petition = $this->storePetition($request, $address->id);
+            $address = $this->storeAddress($request);
+            $petition = $this->storePetition($request, $address);
             $this->storeHashTags($request, $petition->id);
             $this->storeIncidentCategory($request, $petition->id);
             $this->storePhoto($request, $petition->id);
@@ -119,17 +119,22 @@ class PetitionService
         }
     }
 
-    private function storeAddress($data): Address
+    private function storeAddress($request): ?Address
     {
-        $addressRequest = new AddressRequest();
-        $addressRequest->merge($data);
+        if (!empty($request['address'])) {
+            $addressRequest = new AddressRequest();
+            $addressRequest->merge($request['address']);
 
-        return $this->addressRepository->create($addressRequest);
+            return $this->addressRepository->create($addressRequest);
+        }
+        return null;
     }
 
-    private function storePetition($request, $address_id): Petition
+    private function storePetition($request, $address): Petition
     {
-        $request['address_id'] = $address_id;
+        if (!empty($address)) {
+            $request['address_id'] = $address->id;
+        }
         return $this->petitionRepository->create($request);
     }
 }

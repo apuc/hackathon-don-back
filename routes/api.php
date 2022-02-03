@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-require __DIR__ . '/api/' . env('API_VERSION') . '.php';
+require __DIR__ . '/api/' . env('API_VERSION') . 'v1.php';
