@@ -9,8 +9,6 @@ use Api\Http\Resources\v1\UserResource;
 use Api\Services\Petition\UserService;
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller

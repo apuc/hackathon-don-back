@@ -76,9 +76,6 @@ class User extends Authenticatable
     public const ROLE_USER = 3;
     public const ROLE_MODERATOR = 4;
 
-    /**
-     * @return string[]
-     */
     public static function getRoles(): array
     {
         return [
@@ -89,9 +86,6 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function isAdmin(): bool
     {
         foreach ($this->roles()->get() as $role) {
@@ -110,65 +104,41 @@ class User extends Authenticatable
         return $this->hasOneThrough(Address::class, UserProfile::class);
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id')->withTimestamps();
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function news(): BelongsToMany
     {
         return $this->belongsToMany(News::class, 'news_views')->withTimestamps();
     }
 
-    /**
-     * @return HasOne
-     */
     public function userProfile(): HasOne
     {
         return $this->hasOne(UserProfile::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function petition(): HasMany
     {
         return $this->hasMany(Petition::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function petitionViews(): HasMany
     {
         return $this->hasMany(PetitionViews::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function newsViews(): HasMany
     {
         return $this->hasMany(NewsViews::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function authorityTask(): HasMany
     {
         return $this->hasMany(AuthorityTask::class, 'responsible_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function authority(): HasMany
     {
         return $this->hasMany(Authority::class, 'responsible_id');
