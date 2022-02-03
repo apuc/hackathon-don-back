@@ -24,7 +24,7 @@ class PetitionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'integer',
+//            'user_id' => 'integer',
             'description' => 'required|string',
 
             'incident_category' => 'array|required',

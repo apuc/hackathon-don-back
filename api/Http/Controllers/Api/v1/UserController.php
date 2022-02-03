@@ -34,7 +34,7 @@ class UserController extends Controller
 
         return response()->json([
             'success' => true,
-            'data'    => UserResource::make($user)
+            'data' => UserResource::make($user)
         ]);
 
     }
@@ -47,7 +47,7 @@ class UserController extends Controller
             $token = $user->createToken('Laravel Password Grant Client')->accessToken;
 
             return response()->json([
-                'user'  => $user,
+                'user' => $user,
                 'token' => $token
             ]);
         } catch (\Throwable $e) {
@@ -64,13 +64,17 @@ class UserController extends Controller
             return response()->json('User not found', 404);
         }
 //TODO ---------------------------------
-        return response([ 'user_id' => $user->id ], 200);
+        return response()->json([
+            'user_id' => $user->id
+        ]);
 
         $code = mt_rand(1000, 9999);
 
         $user->notify((new AuthLoginNotification($code))->delay(now()->addSeconds(10)));
 
-        return response([ 'user_id' => $user->id ], 200);
+        return response()->json([
+            'user_id' => $user->id
+        ]);
     }
 
     public function checkAuthCode(CheckAuthCodeRequest $request)
@@ -83,12 +87,12 @@ class UserController extends Controller
 //TODO ---------------------------------
         if (1234 === (int)$request['code']) {
             $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-            $response = [ 'token' => $token ];
+            $response = ['token' => $token];
 
             return response($response, 200);
         }
 
-        $response = [ "message" => 'User does not exist' ];
+        $response = ["message" => 'User does not exist'];
 
         return response($response, 422);
     }

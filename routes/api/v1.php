@@ -11,8 +11,8 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::prefix('petition')->group(function () {
-            Route::get('/{phone}', [ PetitionController::class, 'showByUser' ])
-                ->name('show-by-user')
+            Route::get('show-by-phone', [ PetitionController::class, 'showByPhone' ])
+                ->name('show-by-phone')
                 ->withoutMiddleware('auth:api')
                 ->middleware(TelegramSecret::class);
             Route::get('show/{petition_id}', [ PetitionController::class, 'show' ])->name('show');

@@ -5,6 +5,7 @@ namespace App\Repositories\Petition;
 use Api\Http\Requests\v1\PetitionRequest;
 use App\Models\Petition;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Foundation\Http\FormRequest;
 
 class PetitionRepository
 {
@@ -30,7 +31,7 @@ class PetitionRepository
         return Petition::query()->where('phone', '=', $phone)->paginate();
     }
 
-    public function create(PetitionRequest $request): Petition
+    public function create(FormRequest $request): Petition
     {
         $this->model->fill($request->all());
 

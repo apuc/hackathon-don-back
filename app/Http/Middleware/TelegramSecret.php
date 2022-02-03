@@ -17,7 +17,7 @@ class TelegramSecret
     {
         $secret = env('X_SECRET_TG_HASH');
 
-        if($secret && $secret === $request->header('HTTP-X-SECRET-TG-HASH')) {
+        if($secret && $secret === $request->header('X-SECRET-TG-HASH')) {
             return $next($request);
         }
 

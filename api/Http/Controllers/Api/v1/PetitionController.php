@@ -11,6 +11,8 @@ use Api\Services\Petition\PetitionService;
 use App\Http\Controllers\Controller;
 use App\Repositories\Petition\PetitionRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class PetitionController extends Controller
@@ -24,7 +26,7 @@ class PetitionController extends Controller
         $this->petitionRepository = $petitionRepository;
     }
 
-    public function index(PetitionByPhoneRequest $request): JsonResponse
+    public function showByPhone(PetitionByPhoneRequest $request): JsonResponse
     {
         $petitions = $this->petitionRepository->findByPhonePaginated($request['phone']);
 
@@ -65,6 +67,7 @@ class PetitionController extends Controller
     public function store(PetitionRequest $petitionRequest): JsonResponse
     {
         try {
+            $petitionRequest['user_id'] = Auth::user()->id;
             $petition = $this->petitionService->create($petitionRequest);
 
             return response()->json([
@@ -86,6 +89,7 @@ class PetitionController extends Controller
                 'data'    => new PetitionResource($petition)
             ]);
         } catch (Throwable $e) {
+            dd($e->getMessage());
             return response()->json('Saving error', 500);
         }
     }
