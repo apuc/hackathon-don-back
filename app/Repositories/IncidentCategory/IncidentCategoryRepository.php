@@ -7,7 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class IncidentCategoryRepository
 {
-    protected $model;
+    protected IncidentCategory $model;
 
     public function __construct(IncidentCategory $incidentCategory)
     {

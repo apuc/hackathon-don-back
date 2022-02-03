@@ -44,7 +44,6 @@
 
 										<th>Title</th>
 										<th>Mnemonic Name</th>
-										<th>Icon</th>
 										<th>Rating</th>
 										<th>Status</th>
 
@@ -58,7 +57,7 @@
 
 											<td>{{ $incidentCategory->title }}</td>
 											<td>{{ $incidentCategory->mnemonic_name }}</td>
-											<td>{{ $incidentCategory->icon }}</td>
+
 											<td>{{ $incidentCategory->rating }}</td>
                                             <td>
                                                 @if($incidentCategory->status === 1)

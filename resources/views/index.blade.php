@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
-    <title>Main Page</title>
+    <title>Народный контроль</title>
+    <meta property="og:title" content="Народный контроль">
+    <meta property="og:image" content="./images/Logo.png">
+    <meta property="og:description" content="Первое приложение в ДНРдля народа!">
 </head>
 
 <!--Start of Tawk.to Script-->
@@ -38,7 +41,7 @@
             <!-- 1 -->
             <div class="main-page__box-one">
                 <div class="dpr-card">
-                    <div class="dpr-card__title-text">Хочешь держать руку
+                    <div class="dpr-card__title-text">Хотите держать руку
                         на пульсе событий?</div>
                     <div class="dpr-card__box-links">
                         <a href="#" class="dpr-card__links"><img class="dpr-card__google-play" src="./images/Google-play.png" alt="Google-play"></a>
@@ -55,7 +58,7 @@
                     <li class="card-form__item">размещайте свою новость <a href="#" class="card-form__link">прямо сейчас</a></li>
                 </ul>
                 <div class="card-form__card">
-                    <div class="card-form__subject-text">Нашли проблему, сообщи всем!</div>
+                    <div class="card-form__subject-text">Нашли проблему, сообщите всем!</div>
                     <form action="#" class="card-form__form">
                         <input placeholder="Введите ваше имя" type="text" class="card-form__input">
                         <input placeholder="Ваш номер телефона" type="tel" class="card-form__input">
@@ -67,9 +70,6 @@
             </div>
         </div>
     </div>
-</section>
-</div>
-</div>
 </section>
 </body>
 </html>

@@ -12,7 +12,7 @@ class PetitionHashTagRepository
      * @param PetitionHashTagRequest $request
      * @return PetitionHashTag
      */
-    public function create(PetitionHashTagRequest $request)
+    public function create(PetitionHashTagRequest $request): ?PetitionHashTag
     {
         $model = new PetitionHashTag();
         $model->fill($request->all());

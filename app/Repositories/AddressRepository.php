@@ -10,7 +10,7 @@ class AddressRepository
     /**
      * @var Address
      */
-    protected $model;
+    protected Address $model;
 
     /**
      * @param Address $address
@@ -24,7 +24,7 @@ class AddressRepository
      * @param AddressRequest $request
      * @return Address
      */
-    public function create(AddressRequest $request)
+    public function create(AddressRequest $request): ?Address
     {
         $this->model->fill($request->all());
 

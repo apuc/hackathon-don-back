@@ -7,14 +7,14 @@ use App\Models\PetitionMediaFile;
 
 class PetitionMediaFileRepository
 {
-    protected $model;
+    protected PetitionMediaFile $model;
 
     public function __construct(PetitionMediaFile $model)
     {
         $this->model = $model;
     }
 
-    public function create(PetitionMediaFileRequest $request)
+    public function create(PetitionMediaFileRequest $request): ?PetitionMediaFile
     {
         $model = new PetitionMediaFile();
         $model->fill($request->all());

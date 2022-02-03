@@ -89,7 +89,6 @@ class PetitionController extends Controller
                 'data'    => new PetitionResource($petition)
             ]);
         } catch (Throwable $e) {
-            dd($e->getMessage());
             return response()->json('Saving error', 500);
         }
     }

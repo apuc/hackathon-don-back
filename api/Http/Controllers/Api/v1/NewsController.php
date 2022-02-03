@@ -16,7 +16,7 @@ class NewsController extends Controller
         $this->newsRepository = $news;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         $news = $this->newsRepository->findAllPaginated();
 

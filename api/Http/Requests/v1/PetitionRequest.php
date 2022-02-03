@@ -30,7 +30,7 @@ class PetitionRequest extends FormRequest
             'incident_category' => 'array|required',
             'incident_category.*.incident_category_id' => 'integer|required',
 
-            'address' => 'array|required',
+            'address' => 'array',
             'address.longitude' => 'required',
             'address.latitude' => 'required',
             'address.explanation' => 'string',

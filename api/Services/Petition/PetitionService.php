@@ -10,6 +10,7 @@ use Api\Http\Requests\v1\PetitionHashTagRequest;
 use Api\Http\Requests\v1\PetitionMediaFileRequest;
 use Api\Http\Requests\v1\PetitionRequest;
 use App\Models\Address;
+use App\Models\MediaFile;
 use App\Repositories\AddressRepository;
 use App\Repositories\Petition\IncidentCategoryPetitionRepository;
 use App\Repositories\Petition\MediaFileRepository;
@@ -21,12 +22,12 @@ use Illuminate\Support\Facades\DB;
 
 class PetitionService
 {
-    protected $petitionRepository;
-    protected $addressRepository;
-    protected $petitionHasTagRepository;
-    protected $categoryPetitionRepository;
-    protected $petitionMediaFileRepository;
-    protected $mediaFileRepository;
+    protected PetitionRepository $petitionRepository;
+    protected AddressRepository $addressRepository;
+    protected PetitionHashTagRepository $petitionHasTagRepository;
+    protected IncidentCategoryPetitionRepository $categoryPetitionRepository;
+    protected PetitionMediaFileRepository $petitionMediaFileRepository;
+    protected MediaFileRepository $mediaFileRepository;
 
     public function __construct(
         AddressRepository                  $addressRepository,
@@ -44,12 +45,12 @@ class PetitionService
         $this->mediaFileRepository = $mediaFileRepository;
     }
 
-    public function create($request)
+    public function create($request): ?Petition
     {
         return DB::transaction(function () use ($request){
 
-            $address = $this->storeAddress($request['address']);
-            $petition = $this->storePetition($request, $address->id);
+            $address = $this->storeAddress($request);
+            $petition = $this->storePetition($request, $address);
             $this->storeHashTags($request, $petition->id);
             $this->storeIncidentCategory($request, $petition->id);
             $this->storePhoto($request, $petition->id);
@@ -59,7 +60,7 @@ class PetitionService
         });
     }
 
-    private function storeVideo($request, $petition_id)
+    private function storeVideo($request, $petition_id): void
     {
         if (!empty($request['video'])) {
             $video = $this->storeMediaFile($request['video']);
@@ -67,7 +68,7 @@ class PetitionService
         }
     }
 
-    private function storePhoto($request, $petition_id)
+    private function storePhoto($request, $petition_id): void
     {
         if (!empty($request['photo'])) {
             $path = $request->file('photo')->store('uploads', 'public');
@@ -77,7 +78,7 @@ class PetitionService
         }
     }
 
-    protected function storeMediaFile($path)
+    protected function storeMediaFile($path): MediaFile
     {
         $mediaFileRequest = new MediaFileRequest();
         $mediaFileRequest->merge(['path' => $path]);
@@ -85,7 +86,7 @@ class PetitionService
         return $this->mediaFileRepository->create($mediaFileRequest);
     }
 
-    protected  function storeMediaFileForPetition($petition_id, $mediafile_id)
+    protected  function storeMediaFileForPetition($petition_id, $mediafile_id): void
     {
         $petitionMediaFileRequest = new PetitionMediaFileRequest();
         $petitionMediaFileRequest->merge(['petition_id' => $petition_id, 'mediafile_id' => $mediafile_id]);
@@ -93,7 +94,7 @@ class PetitionService
         $this->petitionMediaFileRepository->create($petitionMediaFileRequest);
     }
 
-    private function storeIncidentCategory($request, $petition_id)
+    private function storeIncidentCategory($request, $petition_id): void
     {
         if (!empty($request['incident_category'])) {
             foreach ($request['incident_category'] as $data) {
@@ -106,7 +107,7 @@ class PetitionService
         }
     }
 
-    private function storeHashTags($request, $petition_id)
+    private function storeHashTags($request, $petition_id): void
     {
         if (!empty($request['hashtag'])) {
             foreach ($request['hashtag'] as $data) {
@@ -119,17 +120,22 @@ class PetitionService
         }
     }
 
-    private function storeAddress($data): Address
+    private function storeAddress($request): ?Address
     {
-        $addressRequest = new AddressRequest();
-        $addressRequest->merge($data);
+        if (!empty($request['address'])) {
+            $addressRequest = new AddressRequest();
+            $addressRequest->merge($request['address']);
 
-        return $this->addressRepository->create($addressRequest);
+            return $this->addressRepository->create($addressRequest);
+        }
+        return null;
     }
 
-    private function storePetition($request, $address_id): Petition
+    private function storePetition($request, $address): Petition
     {
-        $request['address_id'] = $address_id;
+        if (!empty($address)) {
+            $request['address_id'] = $address->id;
+        }
         return $this->petitionRepository->create($request);
     }
 }

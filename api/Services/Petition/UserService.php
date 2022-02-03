@@ -6,6 +6,8 @@ use Api\Http\Requests\v1\AddressRequest;
 use Api\Http\Requests\v1\User\UserProfileRequest;
 use Api\Http\Requests\v1\User\UserRequest;
 use Api\Http\Requests\v1\User\UserRolesRequest;
+use App\Models\Address;
+use App\Models\User;
 use App\Repositories\AddressRepository;
 use App\Repositories\User\UserProfileRepository;
 use App\Repositories\User\UserRepository;
@@ -14,10 +16,10 @@ use Illuminate\Support\Facades\DB;
 
 class UserService
 {
-    protected $userRepository;
-    protected $addressRepository;
-    protected $userProfileRepository;
-    protected $userRolesRepository;
+    protected UserRepository $userRepository;
+    protected AddressRepository $addressRepository;
+    protected UserProfileRepository $userProfileRepository;
+    protected UserRolesRepository $userRolesRepository;
 
     public function __construct(
         UserRepository        $userRepository,
@@ -31,7 +33,7 @@ class UserService
         $this->userRolesRepository = $userRolesRepository;
     }
 
-    public function create(UserRequest $request)
+    public function create(UserRequest $request): User
     {
         return DB::transaction(function () use ($request){
             $user = $this->storeUser($request);
@@ -42,7 +44,7 @@ class UserService
         });
     }
 
-    private function storeRoles($request, $user_id)
+    private function storeRoles($request, $user_id): void
     {
         if (!empty($request['roles'])) {
             foreach ($request['roles'] as $role)
@@ -58,7 +60,7 @@ class UserService
         }
     }
 
-    private function storeProfile($request, $user_id)
+    private function storeProfile($request, $user_id): void
     {
         if (!empty($request['fio'])) {
 
@@ -92,12 +94,12 @@ class UserService
         return $request->file('photo')->store('uploads', 'public');
     }
 
-    private function storeUser($request)
+    private function storeUser($request): ?User
     {
         return $this->userRepository->create($request);
     }
 
-    private function storeAddress($data)
+    private function storeAddress($data): ?Address
     {
         $addressRequest = new AddressRequest();
         $addressRequest->merge($data);

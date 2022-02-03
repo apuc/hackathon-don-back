@@ -14,7 +14,7 @@ class UserRolesRepository
         $this->model = $model;
     }
 
-    public function create(UserRolesRequest $request)
+    public function create(UserRolesRequest $request): ?UserRoles
     {
         $model = new UserRoles();
         $model->fill($request->all());

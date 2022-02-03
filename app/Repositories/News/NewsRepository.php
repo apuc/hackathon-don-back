@@ -7,14 +7,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class NewsRepository
 {
-    protected $model;
+    protected News $model;
 
     public function __construct(News $news)
     {
         $this->model = $news;
     }
 
-    public function findById(int $category_id)
+    public function findById(int $category_id): News
     {
         return News::make(
             $this->model::find($category_id));

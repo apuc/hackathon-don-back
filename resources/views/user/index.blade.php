@@ -46,8 +46,6 @@
 										<th>Email</th>
 										<th>Phone</th>
 										<th>Status</th>
-										<th>Confirm Sms Code</th>
-										<th>Confirm Email Code</th>
 
                                         <th></th>
                                     </tr>
@@ -67,8 +65,7 @@
                                                     Не активен
                                                 @endif
                                             </td>
-											<td>{{ $user->confirm_sms_code }}</td>
-											<td>{{ $user->confirm_email_code }}</td>
+
 
                                             <td>
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
