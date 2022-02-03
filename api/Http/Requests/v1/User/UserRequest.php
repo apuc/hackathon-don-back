@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Http\Requests\v1;
+namespace Api\Http\Requests\v1\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,6 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'name' => 'string',
             'password' => 'required',
             'email' => 'email',

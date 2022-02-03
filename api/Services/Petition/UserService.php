@@ -3,9 +3,9 @@
 namespace Api\Services\Petition;
 
 use Api\Http\Requests\v1\AddressRequest;
-use Api\Http\Requests\v1\UserProfileRequest;
-use Api\Http\Requests\v1\UserRequest;
-use Api\Http\Requests\v1\UserRolesRequest;
+use Api\Http\Requests\v1\User\UserProfileRequest;
+use Api\Http\Requests\v1\User\UserRequest;
+use Api\Http\Requests\v1\User\UserRolesRequest;
 use App\Repositories\AddressRepository;
 use App\Repositories\User\UserProfileRepository;
 use App\Repositories\User\UserRepository;
@@ -19,7 +19,6 @@ class UserService
     protected $userProfileRepository;
     protected $userRolesRepository;
 
-
     public function __construct(
         UserRepository        $userRepository,
         AddressRepository     $addressRepository,
@@ -30,11 +29,6 @@ class UserService
         $this->addressRepository = $addressRepository;
         $this->userProfileRepository = $userProfileRepository;
         $this->userRolesRepository = $userRolesRepository;
-    }
-
-    public function show($user_id)
-    {
-        return $this->userRepository->findById($user_id);
     }
 
     public function create(UserRequest $request)

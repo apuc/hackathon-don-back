@@ -3,6 +3,7 @@
 namespace App\Repositories\IncidentCategory;
 
 use App\Models\IncidentCategory;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class IncidentCategoryRepository
 {
@@ -13,9 +14,14 @@ class IncidentCategoryRepository
         $this->model = $incidentCategory;
     }
 
-    public function findById(int $category_id)
+    public function findById(int $category_id): ?IncidentCategory
     {
         return $this->model::find($category_id);
+    }
+
+    public function findAllPaginated(): LengthAwarePaginator
+    {
+        return IncidentCategory::query()->paginate();
     }
 
     public function getAll()

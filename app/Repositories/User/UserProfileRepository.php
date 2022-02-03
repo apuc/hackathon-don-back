@@ -2,7 +2,7 @@
 
 namespace App\Repositories\User;
 
-use Api\Http\Requests\v1\UserProfileRequest;
+use Api\Http\Requests\v1\User\UserProfileRequest;
 use App\Models\UserProfile;
 
 class UserProfileRepository

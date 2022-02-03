@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $description
  * @property int $rating
  * @property int $views
+ * @property string $phone
  * @property DateTime $created_at
  * @property DateTime $updated_at
  *
@@ -38,6 +39,7 @@ class Petition extends Model
         'address_id',
         'status',
         'description',
+        'phone'
     ];
 
     protected $table = 'petition';

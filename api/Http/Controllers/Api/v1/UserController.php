@@ -4,25 +4,25 @@ namespace Api\Http\Controllers\Api\v1;
 
 use Api\Http\Requests\v1\User\Notification\CheckAuthCodeRequest;
 use Api\Http\Requests\v1\User\Notification\SendAuthCodeRequest;
-use Api\Http\Requests\v1\UserRequest;
+use Api\Http\Requests\v1\User\UserRequest;
 use Api\Http\Resources\v1\UserResource;
-use Api\Repositories\User\UserRepository;
 use Api\Services\Petition\UserService;
 use App\Http\Controllers\Controller;
+use App\Repositories\User\UserRepository;
 use Illuminate\Http\JsonResponse;
-
 
 class UserController extends Controller
 {
-    protected $userService;
-    protected $userRepository;
+    protected UserService $userService;
+    protected UserRepository $userRepository;
 
-    public function __construct(UserService $userService, UserRepository $userRepository)
+    public function __construct(
+        UserService    $userService,
+        UserRepository $userRepository)
     {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
     }
-
 
     public function show($userId): JsonResponse
     {
@@ -32,31 +32,30 @@ class UserController extends Controller
             return response()->json('User not found', 404);
         }
 
-        return response()->json(
-            [
-                'success' => true,
-                'data'    => UserResource::make($user)
-            ]);
+        return response()->json([
+            'success' => true,
+            'data'    => UserResource::make($user)
+        ]);
 
     }
 
-    public function store(UserRequest $userRequest)
+    public function store(UserRequest $userRequest): JsonResponse
     {
         try {
             $user = $this->userService->create($userRequest);
 
             $token = $user->createToken('Laravel Password Grant Client')->accessToken;
 
-            return [
+            return response()->json([
                 'user'  => $user,
                 'token' => $token
-            ];
+            ]);
         } catch (\Throwable $e) {
             abort(500, $e->getMessage());
         }
     }
 
-    public function sendAuthCode(SendAuthCodeRequest $userNotificationRequest)
+    public function sendAuthCode(SendAuthCodeRequest $userNotificationRequest): JsonResponse
     {
         $recipient = $userNotificationRequest['recipient'];
         $user = $this->userRepository->findByEmail($recipient) ?? $this->userRepository->findByPhone($recipient);
@@ -65,15 +64,19 @@ class UserController extends Controller
             return response()->json('User not found', 404);
         }
 //TODO ---------------------------------
-        return response(['user_id' => $user->id], 200);
+        return response([ 'user_id' => $user->id ], 200);
 
         $code = mt_rand(1000, 9999);
 
-        $user->notify((new AuthLoginNotification($code)));
+        $user->notify((new AuthLoginNotification($code))->delay(now()->addSeconds(10)));
 
-        return response(['user_id' => $user->id], 200);
+        return response([ 'user_id' => $user->id ], 200);
     }
 
+    /**
+     * @param CheckAuthCodeRequest $request
+     * @return Application|ResponseFactory|JsonResponse|\Illuminate\Http\Response
+     */
     public function checkAuthCode(CheckAuthCodeRequest $request)
     {
         $user = $this->userRepository->findById($request['user_id']);
@@ -89,8 +92,8 @@ class UserController extends Controller
             return response($response, 200);
         }
 
-        $response = ["message" =>'User does not exist'];
-        return response($response, 422);
+        $response = [ "message" => 'User does not exist' ];
 
+        return response($response, 422);
     }
 }

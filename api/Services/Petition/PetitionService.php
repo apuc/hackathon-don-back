@@ -5,6 +5,7 @@ namespace Api\Services\Petition;
 use Api\Http\Requests\v1\AddressRequest;
 use Api\Http\Requests\v1\IncidentCategoryPetitionRequest;
 use Api\Http\Requests\v1\MediaFileRequest;
+use Api\Http\Requests\v1\PetitionAnonymouslyRequest;
 use Api\Http\Requests\v1\PetitionHashTagRequest;
 use Api\Http\Requests\v1\PetitionMediaFileRequest;
 use Api\Http\Requests\v1\PetitionRequest;
@@ -43,17 +44,7 @@ class PetitionService
         $this->mediaFileRepository = $mediaFileRepository;
     }
 
-    public function show($petition_id)
-    {
-        return $this->petitionRepository->findById($petition_id);
-    }
-
-    public function showByUser($user_id)
-    {
-        return $this->petitionRepository->findByUserId($user_id);
-    }
-
-    public function create(PetitionRequest $request)
+    public function create($request)
     {
         return DB::transaction(function () use ($request){
 

@@ -2,11 +2,18 @@
 
 namespace App\Repositories\User;
 
-use Api\Http\Requests\v1\UserRolesRequest;
+use Api\Http\Requests\v1\User\UserRolesRequest;
 use App\Models\UserRoles;
 
 class UserRolesRepository
 {
+    protected UserRoles $model;
+
+    public function __construct(UserRoles $model)
+    {
+        $this->model = $model;
+    }
+
     public function create(UserRolesRequest $request)
     {
         $model = new UserRoles();

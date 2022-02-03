@@ -2,36 +2,48 @@
 
 namespace Api\Http\Controllers\Api\v1;
 
+use Api\Http\Resources\v1\Collections\IncidentCategoryCollection;
 use Api\Http\Resources\v1\IncidentCategoryResource;
 use Api\Services\Petition\IncidentCategoryService;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Repositories\IncidentCategory\IncidentCategoryRepository;
+use Illuminate\Http\JsonResponse;
 
 class IncidentCategoryController extends Controller
 {
-    protected $incidentCategoryService;
+    protected IncidentCategoryService $incidentCategoryService;
+    protected IncidentCategoryRepository $incidentCategoryRepository;
 
-    public function __construct(IncidentCategoryService $incidentCategoryService)
+    public function __construct(
+        IncidentCategoryService    $incidentCategoryService,
+        IncidentCategoryRepository $incidentCategoryRepository
+    )
     {
         $this->incidentCategoryService = $incidentCategoryService;
+        $this->incidentCategoryRepository = $incidentCategoryRepository;
+    }
+
+    public function index(): JsonResponse
+    {
+        $categories = $this->incidentCategoryRepository->findAllPaginated();
+
+        return response()->json([
+            'success' => true,
+            'data'    => new IncidentCategoryCollection($categories),
+        ]);
     }
 
     public function show($category_id = null): JsonResponse
     {
-        $categories = $this->incidentCategoryService->show($category_id);
+        $category = $this->incidentCategoryRepository->findById($category_id);
 
-        if (empty($categories)) {
+        if (empty($category)) {
             return response()->json('Category not found', 404);
         }
 
-        if($category_id != null) {
-            return response()->json(['success' => true,
-                'data' => new IncidentCategoryResource($categories)
-            ]);
-        }
-
-        return response()->json(['success' => true,
-            'data' => IncidentCategoryResource::collection($categories)
+        return response()->json([
+            'success' => true,
+            'data'    => new IncidentCategoryResource($category)
         ]);
     }
 }
