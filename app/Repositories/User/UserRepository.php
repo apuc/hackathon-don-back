@@ -17,7 +17,7 @@ class UserRepository
         $this->model = $user;
     }
 
-    public function findById($user_id)
+    public function findById($user_id): ?User
     {
         return $this->model->find($user_id);
     }
@@ -32,7 +32,7 @@ class UserRepository
         return $this->model::query()->where('phone', '=', $phone)->first();
     }
 
-    public function create(UserRequest $request): User
+    public function create(UserRequest $request): ?User
     {
         $this->model->fill(array(
             'name' => $request['name'],

@@ -8,14 +8,14 @@ use App\Models\IncidentCategoryPetition;
 
 class IncidentCategoryPetitionRepository
 {
-    protected $model;
+    protected IncidentCategoryPetition $model;
 
     public function __construct(IncidentCategoryPetition $model)
     {
         $this->model = $model;
     }
 
-    public function create(IncidentCategoryPetitionRequest $request)
+    public function create(IncidentCategoryPetitionRequest $request): ?IncidentCategoryPetition
     {
         $model = new IncidentCategoryPetition();
         $model->fill($request->all());

@@ -10,7 +10,7 @@ class UserProfileRepository
     /**
      * @var UserProfile
      */
-    protected $model;
+    protected UserProfile $model;
 
     /**
      * @param UserProfile $profile
@@ -24,7 +24,7 @@ class UserProfileRepository
      * @param UserProfileRequest $request
      * @return UserProfile
      */
-    public function create(UserProfileRequest $request)
+    public function create(UserProfileRequest $request): ?UserProfile
     {
         $this->model->fill($request->all());
 

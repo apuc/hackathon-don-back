@@ -7,14 +7,14 @@ use App\Models\MediaFile;
 
 class MediaFileRepository
 {
-    protected $model;
+    protected MediaFile $model;
 
     public function __construct(MediaFile $model)
     {
         $this->model = $model;
     }
 
-    public function create(MediaFileRequest $request)
+    public function create(MediaFileRequest $request): ?MediaFile
     {
         $model = new MediaFile();
         $model->fill($request->all());

@@ -9,14 +9,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PetitionRepository
 {
-    protected $model;
+    protected Petition $model;
 
     public function __construct(Petition $petition)
     {
         $this->model = $petition;
     }
 
-    public function findById(int $id)
+    public function findById(int $id): Petition
     {
         return $this->model->find($id);
     }
@@ -31,7 +31,7 @@ class PetitionRepository
         return Petition::query()->where('phone', '=', $phone)->paginate();
     }
 
-    public function create(FormRequest $request): Petition
+    public function create(FormRequest $request): ?Petition
     {
         $this->model->fill($request->all());
 
