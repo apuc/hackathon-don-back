@@ -25,14 +25,22 @@ class AuthorityTaskMediaFile extends Model
         'authority_task_id',
         'mediafile_id',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'mediafile';
 
+    /**
+     * @return BelongsTo
+     */
     public function authorityTask(): BelongsTo
     {
         return $this->belongsTo(AuthorityTask::class, 'authority_task_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function mediaFile()
     {
         return $this->belongsTo(MediaFile::class, 'mediafile_id');

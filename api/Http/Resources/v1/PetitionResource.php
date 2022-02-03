@@ -2,9 +2,7 @@
 
 namespace Api\Http\Resources\v1;
 
-use Api\Http\Resources\v1\MediaFileResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Api\Http\Resources\v1\AddressResource;
 
 class PetitionResource extends JsonResource
 {
@@ -17,6 +15,7 @@ class PetitionResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'user_id' => $this->user_id,
             'status' => $this->status,
             'description' => $this->description,

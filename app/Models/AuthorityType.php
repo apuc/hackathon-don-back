@@ -24,9 +24,14 @@ class AuthorityType extends Model
         'title',
         'is_visible',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'authority_type';
 
+    /**
+     * @return HasMany
+     */
     public function authority(): HasMany
     {
         return $this->hasMany(Authority::class);

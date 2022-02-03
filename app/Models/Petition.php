@@ -42,43 +42,70 @@ class Petition extends Model
         'phone'
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'petition';
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'address_id');
     }
 
+    /**
+     * @return HasMany
+     */
     public function petitionLog(): HasMany
     {
         return $this->hasMany(PetitionLog::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function authorityTask(): HasMany
     {
         return $this->hasMany(AuthorityTask::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function petitionViews(): HasMany
     {
         return $this->hasMany(PetitionViews::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function incidentCategory(): BelongsToMany
     {
         return $this->belongsToMany(IncidentCategory::class, 'incident_category_petition')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function mediafile(): BelongsToMany
     {
         return $this->belongsToMany(MediaFile::class, 'petition_mediafile', 'petition_id', 'mediafile_id')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function hashTag(): BelongsToMany
     {
         return $this->belongsToMany(HashTag::class, 'petition_hash_tag')->withTimestamps();

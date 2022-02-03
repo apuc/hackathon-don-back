@@ -26,13 +26,22 @@ class UserRoles extends Model
         'role_id',
     ];
 
+    /**
+     * @var string
+     */
     protected $table = 'user_roles';
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class, 'role_id');

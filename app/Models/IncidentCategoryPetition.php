@@ -25,14 +25,22 @@ class IncidentCategoryPetition extends Model
         'petition_id',
         'incident_category_id',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'incident_category_petition';
 
+    /**
+     * @return BelongsTo
+     */
     public function incidentCategory(): BelongsTo
     {
         return $this->belongsTo(IncidentCategory::class, 'incident_category_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class, 'petition_id');

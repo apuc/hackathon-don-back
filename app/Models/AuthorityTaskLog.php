@@ -22,6 +22,8 @@ class AuthorityTaskLog extends Model
         'authority_task_id',
         'log_type_id',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'authority_task_log';
 }

@@ -29,23 +29,38 @@ class Address extends Model
         'latitude',
         'explanation'
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'address';
 
+    /**
+     * @return HasMany
+     */
     public function userProfile(): HasMany
     {
         return $this->hasMany(UserProfile::class);
     }
+
+    /**
+     * @return HasMany
+     */
     public function transportStop(): HasMany
     {
         return $this->hasMany(TransportStop::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function petition(): HasMany
     {
         return $this->hasMany(Petition::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function authority(): HasMany
     {
         return $this->hasMany(Authority::class);

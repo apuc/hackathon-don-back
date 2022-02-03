@@ -38,29 +38,46 @@ class AuthorityTask extends Model
         'work_date',
         'responsible_id',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'authority_task';
 
+    /**
+     * @return BelongsTo
+     */
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'responsible_id');
     }
 
+    /**
+     * @return HasMany
+     */
     public function authorityTaskLog(): HasMany
     {
         return $this->hasMany(AuthorityTaskLog::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function mediaFile(): BelongsToMany
     {
         return $this->belongsToMany(MediaFile::class, 'authority_task_mediafile')->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function authority(): BelongsToMany
     {
         return $this->belongsToMany(Authority::class, 'authority_authority_task')->withTimestamps();

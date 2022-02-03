@@ -23,14 +23,22 @@ class LogType extends Model
     protected $fillable = [
         'title',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'incident_category';
 
+    /**
+     * @return HasMany
+     */
     public function petitionLog(): HasMany
     {
         return $this->hasMany(PetitionLog::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function authorityTaskLog(): HasMany
     {
         return $this->hasMany(AuthorityTaskLog::class);

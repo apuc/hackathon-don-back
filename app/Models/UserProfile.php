@@ -38,14 +38,22 @@ class UserProfile extends Model
         'email_verified_at',
         'phone_verified_at',
     ];
-
+    /**
+     * @var string
+     */
     protected $table = 'user_profile';
 
+    /**
+     * @return BelongsTo
+     */
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
